@@ -1,0 +1,18 @@
+{
+  "evidences": [
+    {
+      "evidence_id": "EV-001",
+      "axis_id": "AX-03",
+      "domain_id": "DM-03-01",
+      "standard_id": "ST-03-01-01",
+      "indicator_text": "تنفيذ تقويم ذاتي سنوي",
+      "school_id": "SCH-001",
+      "uploaded_by": "USR-ADMIN-01",
+      "evidence_type": "document",
+      "evidence_title": "تقرير التقويم الذاتي للمدرسة",
+      "file_name": "self_evaluation_2025.pdf",
+      "upload_date": "2025-01-15",
+      "notes": "تم اعتماده من إدارة المدرسة"
+    }
+  ]
+}
