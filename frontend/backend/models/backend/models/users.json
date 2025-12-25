@@ -1,20 +1,36 @@
-[
-  {
-    "user_id": "USR-001",
-    "name": "مدير المدرسة",
-    "role": "admin",
-    "school_id": "SCH-001"
-  },
-  {
-    "user_id": "USR-002",
-    "name": "مشرف تربوي",
-    "role": "supervisor",
-    "school_id": "SCH-001"
-  },
-  {
-    "user_id": "USR-003",
-    "name": "معلم مادة",
-    "role": "teacher",
-    "school_id": "SCH-001"
-  }
-]
+{
+  "users": [
+    {
+      "user_id": "USR-ADMIN-01",
+      "name": "مدير المدرسة",
+      "role": "admin",
+      "school_id": "SCH-001",
+      "permissions": [
+        "manage_users",
+        "add_standards",
+        "review_evidence",
+        "approve_reports"
+      ]
+    },
+    {
+      "user_id": "USR-TEACHER-01",
+      "name": "معلم",
+      "role": "teacher",
+      "school_id": "SCH-001",
+      "permissions": [
+        "upload_evidence",
+        "view_standards"
+      ]
+    },
+    {
+      "user_id": "USR-SUPERVISOR-01",
+      "name": "مشرف تربوي",
+      "role": "supervisor",
+      "school_id": "SCH-001",
+      "permissions": [
+        "review_evidence",
+        "view_reports"
+      ]
+    }
+  ]
+}
