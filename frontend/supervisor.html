@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة المشرف التربوي | نظام تقويم الأداء المدرسي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: #1f3a5f;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      padding: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+    }
+    th {
+      background: #f0f2f5;
+    }
+    .badge {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .good { background: #2a9d8f; color: #fff; }
+    .mid { background: #f4a261; color: #fff; }
+    .low { background: #e63946; color: #fff; }
+    .btn {
+      padding: 6px 12px;
+      background: #457b9d;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>لوحة المشرف التربوي</div>
+  <div>مادة: الرياضيات</div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>المدارس التابعة</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>اسم المدرسة</th>
+          <th>نسبة الإتقان</th>
+          <th>التوصيف</th>
+          <th>التقارير</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>مدرسة بحر عمان</td>
+          <td>78%</td>
+          <td><span class="badge mid">جيد جدًا</span></td>
+          <td><a href="report.html" class="btn">عرض التقرير</a></td>
+        </tr>
+        <tr>
+          <td>مدرسة افتراضية</td>
+          <td>62%</td>
+          <td><span class="badge mid">جيد</span></td>
+          <td><a href="report.html" class="btn">عرض التقرير</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>ملاحظات إشرافية</h3>
+    <ul>
+      <li>تحسن ملحوظ في توثيق الأدلة الصفية.</li>
+      <li>الحاجة إلى دعم في تحليل نتائج الاختبارات.</li>
+      <li>يوصى بمتابعة تنفيذ خطط التحسين.</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
