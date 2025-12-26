@@ -97,7 +97,7 @@
   }
 
   function login() {
-    fetch("data/users.json")
+    fetch("./data/users.json")
       .then(res => res.json())
       .then(users => {
         const user = users.find(
