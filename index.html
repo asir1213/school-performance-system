@@ -1,157 +1,180 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>نظام تقويم أداء المدارس</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Tahoma", Arial;
-      background: #f4f7fb;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<title>نظام تقييم أداء المدارس</title>
 
-    header {
-      background: #ffffff;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+<style>
+body {
+  margin: 0;
+  font-family: "Tahoma", Arial;
+  background: #f4f7fb;
+  color: #1e293b;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 22px;
-      color: #1f3c88;
-    }
+/* الشريط العلوي */
+header {
+  background: #ffffff;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
 
-    .login-btn {
-      background: #1f3c88;
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1e3a8a;
+}
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
+.login-btn {
+  background: #2563eb;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
 
-    .hero h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #1f3c88;
-    }
+/* الهيرو */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
 
-    .hero p {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 30px;
-    }
+.hero h1 {
+  font-size: 28px;
+  color: #1e3a8a;
+}
 
-    .hero a {
-      background: #1f3c88;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 16px;
-    }
+.hero p {
+  margin-top: 10px;
+  color: #475569;
+}
 
-    .section-title {
-      text-align: center;
-      margin: 50px 0 20px;
-      font-size: 22px;
-      color: #1f3c88;
-    }
+.hero .main-btn {
+  margin-top: 25px;
+  display: inline-block;
+  background: #1e40af;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 16px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 0 40px 60px;
-    }
+/* المحاور */
+.section {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
 
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
+.section h2 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 30px;
+}
 
-    .card h3 {
-      margin: 10px 0;
-      color: #1f3c88;
-    }
+/* كروت المحاور */
+.axis-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
 
-    .card p {
-      font-size: 14px;
-      color: #666;
-    }
+.axis-title {
+  background: #16a34a;
+  color: white;
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
 
-    .card a {
-      display: inline-block;
-      margin-top: 15px;
-      background: #28a745;
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-    }
+/* المجالات */
+.domains {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
 
-    footer {
-      background: #ffffff;
-      text-align: center;
-      padding: 15px;
-      color: #888;
-      font-size: 13px;
-      border-top: 1px solid #eee;
-    }
-  </style>
+.domain {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+
+.domain h3 {
+  color: #1e3a8a;
+  font-size: 16px;
+}
+
+.domain p {
+  font-size: 13px;
+  color: #475569;
+  margin: 10px 0;
+}
+
+.domain a {
+  display: inline-block;
+  margin-top: 10px;
+  background: #2563eb;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>نظام تقويم أداء المدارس في سلطنة عمان</h1>
-    <button onclick="location.href='login.html'">تسجيل الدخول</button>
-  </header>
+<header>
+  <div class="logo">📊 نظام تقييم أداء المدارس</div>
+  <a class="login-btn" href="login.html">تسجيل الدخول</a>
+</header>
 
-  <section class="hero">
-    <h2>نحو تعليم مدرسي متميز</h2>
-    <p>منصة ذكية لتقويم الأداء المدرسي وفق معايير الجودة المعتمدة</p>
-    <a href="login.html">ابدأ الآن</a>
-  </section>
+<div class="hero">
+  <h1>نظام وطني ذكي لتقييم أداء المدارس</h1>
+  <p>نحو مدارس متميزة في الأداء، متطورة في نتائجها</p>
+  <a class="main-btn" href="login.html">ابدأ الآن</a>
+</div>
 
-  <h3 class="section-title">المحاور الرئيسية والمجالات التابعة لها</h3>
+<div class="section">
+  <h2>المحاور الرئيسية والمجالات التابعة لها</h2>
 
-  <section class="cards">
-    <div class="card">
-      <h3>المحور الأول</h3>
-      <p>جودة نواتج التعلم</p>
-      <a href="#">عرض</a>
+  <div class="axis-card">
+    <div class="axis-title">المحور الثالث: ضمان جودة نواتج التعلم وعمليات المدرسة</div>
+
+    <div class="domains">
+      <div class="domain">
+        <h3>التقويم الذاتي المدرسي</h3>
+        <p>قياس الأداء وتحليل النتائج وتحسين الممارسات</p>
+        <a href="login.html">دخول</a>
+      </div>
+
+      <div class="domain">
+        <h3>التقويم الخارجي</h3>
+        <p>متابعة الأداء وفق معايير الوزارة</p>
+        <a href="login.html">دخول</a>
+      </div>
+
+      <div class="domain">
+        <h3>تحسين نواتج التعلم</h3>
+        <p>تحليل النتائج وخطط التحسين</p>
+        <a href="login.html">دخول</a>
+      </div>
     </div>
+  </div>
 
-    <div class="card">
-      <h3>المحور الثاني</h3>
-      <p>القيادة المدرسية والحوكمة</p>
-      <a href="#">عرض</a>
-    </div>
-
-    <div class="card">
-      <h3>المحور الثالث</h3>
-      <p>ضمان جودة نواتج التعلم وعمليات المدرسة</p>
-      <a href="#">عرض</a>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 – نظام تقويم أداء المدارس
-  </footer>
+</div>
 
 </body>
 </html>
