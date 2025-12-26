@@ -2,53 +2,107 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة التحكم - نظام تقييم أداء المدارس</title>
+  <title>لوحة التحكم | نظام تقييم أداء المدارس</title>
+
   <style>
     body {
-      font-family: Tahoma, Arial;
       margin: 0;
-      background: #f5f7fb;
+      font-family: Tahoma, Arial;
+      background: #f4f7fb;
     }
+
+    /* الشريط العلوي */
     header {
-      background: #1e3a8a;
+      background: #1f3c88;
       color: white;
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .lang-btn {
-      background: white;
-      color: #1e3a8a;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
+
+    header .title {
+      font-size: 18px;
       font-weight: bold;
     }
+
+    header .user-info {
+      font-size: 14px;
+    }
+
+    header button {
+      background: #ef4444;
+      border: none;
+      color: white;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    /* المحتوى */
     .container {
       padding: 30px;
     }
+
+    .welcome {
+      margin-bottom: 25px;
+      color: #1f3c88;
+      font-size: 18px;
+    }
+
+    /* الكروت */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
+
     .card {
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
     }
+
     .card h3 {
       margin: 0;
+      font-size: 15px;
       color: #555;
     }
+
     .card span {
-      font-size: 36px;
-      color: #1e3a8a;
+      display: block;
+      margin-top: 12px;
+      font-size: 34px;
       font-weight: bold;
+      color: #1f3c88;
+    }
+
+    /* أزرار الإجراءات */
+    .actions {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #1f3c88, #2563eb);
+      color: white;
+      text-decoration: none;
+      padding: 18px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: 0.3s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(135deg, #2563eb, #1e40af);
     }
   </style>
 </head>
@@ -56,61 +110,91 @@
 <body>
 
 <header>
-  <h2 id="title">لوحة التحكم – نظام تقييم أداء المدارس</h2>
-  <button class="lang-btn" onclick="toggleLang()">English</button>
+  <div class="title">لوحة التحكم – نظام تقييم أداء المدارس</div>
+
+  <div class="user-info">
+    <span id="userName"></span>
+    <button onclick="logout()">تسجيل الخروج</button>
+  </div>
 </header>
 
 <div class="container">
+
+  <div class="welcome" id="welcomeText"></div>
+
   <div class="cards">
     <div class="card">
-      <h3 id="schoolsText">عدد المدارس</h3>
+      <h3>عدد المدارس</h3>
       <span id="schoolsCount">0</span>
     </div>
+
     <div class="card">
-      <h3 id="domainsText">المجالات</h3>
+      <h3>عدد المستخدمين</h3>
+      <span id="usersCount">0</span>
+    </div>
+
+    <div class="card">
+      <h3>عدد المجالات</h3>
       <span id="domainsCount">0</span>
     </div>
+
     <div class="card">
-      <h3 id="standardsText">المعايير</h3>
+      <h3>عدد المعايير</h3>
       <span id="standardsCount">0</span>
     </div>
   </div>
+
+  <div class="actions">
+    <a href="#" class="action-btn">رفع الأدلة</a>
+    <a href="#" class="action-btn">التقارير</a>
+    <a href="#" class="action-btn">إدارة المستخدمين</a>
+  </div>
+
 </div>
 
 <script>
-  let currentLang = "ar";
+  /* 🔐 التحقق من تسجيل الدخول */
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  function toggleLang() {
-    if (currentLang === "ar") {
-      document.documentElement.lang = "en";
-      document.documentElement.dir = "ltr";
-      title.innerText = "Dashboard – School Performance System";
-      schoolsText.innerText = "Schools";
-      domainsText.innerText = "Domains";
-      standardsText.innerText = "Standards";
-      currentLang = "en";
-    } else {
-      document.documentElement.lang = "ar";
-      document.documentElement.dir = "rtl";
-      title.innerText = "لوحة التحكم – نظام تقييم أداء المدارس";
-      schoolsText.innerText = "عدد المدارس";
-      domainsText.innerText = "المجالات";
-      standardsText.innerText = "المعايير";
-      currentLang = "ar";
-    }
+  if (!user) {
+    window.location.href = "login.html";
   }
 
+  document.getElementById("userName").innerText = user.name;
+  document.getElementById("welcomeText").innerText =
+    "مرحبًا " + user.name + " – الدور: " + user.role;
+
+  /* 🔴 تسجيل الخروج */
+  function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
+  }
+
+  /* 📊 تحميل الإحصائيات */
   fetch("data/schools.json")
     .then(res => res.json())
-    .then(data => schoolsCount.innerText = data.length);
+    .then(data => {
+      document.getElementById("schoolsCount").innerText = data.length;
+    });
+
+  fetch("data/users.json")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("usersCount").innerText = data.length;
+    });
 
   fetch("data/domains.json")
     .then(res => res.json())
-    .then(data => domainsCount.innerText = data.length);
+    .then(data => {
+      document.getElementById("domainsCount").innerText = data.length;
+    });
 
   fetch("data/standards.json")
     .then(res => res.json())
-    .then(data => standardsCount.innerText = data.length);
+    .then(data => {
+      document.getElementById("standardsCount").innerText = data.length;
+    });
+
 </script>
 
 </body>
