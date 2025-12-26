@@ -1,8 +1,23 @@
 [
   {
     "email": "admin@gmail.com",
-    "password": "123456",
+    "password": "Admin@2025",
     "role": "admin",
+    "school": "all",
     "name": "مدير النظام"
+  },
+  {
+    "email": "supervisor@gmail.com",
+    "password": "Sup@2025",
+    "role": "supervisor",
+    "school": "مدرسة بحر عمان",
+    "name": "مشرف تربوي"
+  },
+  {
+    "email": "teacher@gmail.com",
+    "password": "Teach@2025",
+    "role": "teacher",
+    "school": "مدرسة بحر عمان",
+    "name": "معلم"
   }
 ]
