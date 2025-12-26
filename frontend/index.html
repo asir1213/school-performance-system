@@ -2,148 +2,95 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة المعلم | نظام تقويم الأداء المدرسي</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام تقييم أداء المدارس</title>
   <style>
     body {
-      font-family: Tahoma, Arial, sans-serif;
+      font-family: "Tahoma", Arial;
       background: #f5f7fa;
       margin: 0;
-      color: #333;
+      padding: 20px;
     }
-    header {
-      background: #1f3a5f;
-      color: #fff;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    h1 {
+      text-align: center;
+      color: #1f3c88;
     }
-    .container {
-      padding: 24px;
-    }
-    .card {
+    .axis, .domain, .standard {
       background: #fff;
       border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .progress {
-      height: 14px;
-      background: #e0e0e0;
-      border-radius: 7px;
-      overflow: hidden;
-      margin-top: 8px;
+    .axis {
+      border-right: 6px solid #1f3c88;
     }
-    .progress span {
-      display: block;
-      height: 100%;
-      width: 72%;
-      background: #f4a261;
+    .domain {
+      border-right: 6px solid #4aa3df;
+      margin-right: 20px;
     }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .standard {
+      border-right: 6px solid #7ed957;
+      margin-right: 40px;
     }
-    .stat {
-      text-align: center;
+    ul {
+      margin-right: 60px;
     }
-    .btn {
-      display: inline-block;
-      padding: 12px 18px;
-      background: #2a9d8f;
+    .percent {
+      float: left;
+      background: #1f3c88;
       color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 12px 8px 12px 0;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 14px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      text-align: right;
-    }
-    th {
-      background: #f0f2f5;
-    }
-    .status-ok { color: #2a9d8f; font-weight: bold; }
-    .status-wait { color: #f4a261; font-weight: bold; }
-    .status-no { color: #e63946; font-weight: bold; }
   </style>
 </head>
 <body>
 
-<header>
-  <div>لوحة المعلم</div>
-  <div>مدرسة بحر عمان</div>
-</header>
+<h1>📊 نظام ذكي لتقييم أداء المدارس</h1>
 
-<div class="container">
+<div id="app"></div>
 
-  <div class="card">
-    <h3>نسبة الإتقان</h3>
-    <strong>72% — جيد</strong>
-    <div class="progress">
-      <span></span>
-    </div>
-  </div>
+<script>
+fetch("../backend/models/standards.json")
+  .then(res => res.json())
+  .then(data => {
+    const app = document.getElementById("app");
 
-  <div class="card stats">
-    <div class="stat">
-      <div>الأدلة</div>
-      <strong>12</strong>
-    </div>
-    <div class="stat">
-      <div>قيد المراجعة</div>
-      <strong>3</strong>
-    </div>
-    <div class="stat">
-      <div>معتمدة</div>
-      <strong>8</strong>
-    </div>
-    <div class="stat">
-      <div>مرفوضة</div>
-      <strong>1</strong>
-    </div>
-  </div>
+    Object.values(data).forEach(axis => {
+      const axisDiv = document.createElement("div");
+      axisDiv.className = "axis";
+      axisDiv.innerHTML = `<strong>${axis.name}</strong>`;
 
-  <a class="btn" href="upload.html">➕ رفع دليل جديد</a>
+      axis.domains.forEach(domain => {
+        const domainDiv = document.createElement("div");
+        domainDiv.className = "domain";
+        domainDiv.innerHTML = `<strong>${domain.name}</strong>`;
 
-  <div class="card">
-    <h3>أدلتي</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>العنوان</th>
-          <th>المجال</th>
-          <th>الحالة</th>
-          <th>التاريخ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>تقرير تقويم ذاتي</td>
-          <td>التقويم الذاتي</td>
-          <td class="status-ok">معتمد</td>
-          <td>10/03/2025</td>
-        </tr>
-        <tr>
-          <td>خطة تحسين</td>
-          <td>تحليل نواتج التعلم</td>
-          <td class="status-wait">قيد المراجعة</td>
-          <td>15/03/2025</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        domain.standards.forEach(standard => {
+          const stdDiv = document.createElement("div");
+          stdDiv.className = "standard";
 
-</div>
+          const indicators = standard.indicators.length;
+          const percent = Math.round((indicators / indicators) * 100);
+
+          stdDiv.innerHTML = `
+            <span class="percent">${percent}%</span>
+            <strong>${standard.name}</strong>
+            <ul>
+              ${standard.indicators.map(i => `<li>${i}</li>`).join("")}
+            </ul>
+          `;
+          domainDiv.appendChild(stdDiv);
+        });
+
+        axisDiv.appendChild(domainDiv);
+      });
+
+      app.appendChild(axisDiv);
+    });
+  });
+</script>
 
 </body>
 </html>
