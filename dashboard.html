@@ -1,125 +1,116 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>لوحة التحكم | نظام تقييم أداء المدارس</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: "Tahoma", Arial;
-  background: #f1f5f9;
-}
-
-/* الشريط العلوي */
-.topbar {
-  background: #1e3a8a;
-  color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logout {
-  background: #ef4444;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-/* المحتوى */
-.container {
-  padding: 30px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  color: #1e293b;
-}
-
-/* الكروت */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.card h3 {
-  margin: 0;
-  color: #475569;
-  font-size: 16px;
-}
-
-.card span {
-  display: block;
-  margin-top: 10px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #1e3a8a;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - نظام تقييم أداء المدارس</title>
+  <style>
+    body {
+      font-family: Tahoma, Arial;
+      margin: 0;
+      background: #f5f7fb;
+    }
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .lang-btn {
+      background: white;
+      color: #1e3a8a;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .container {
+      padding: 30px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin: 0;
+      color: #555;
+    }
+    .card span {
+      font-size: 36px;
+      color: #1e3a8a;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div>لوحة التحكم – نظام تقييم أداء المدارس</div>
-  <button class="logout" onclick="logout()">تسجيل الخروج</button>
-</div>
+<header>
+  <h2 id="title">لوحة التحكم – نظام تقييم أداء المدارس</h2>
+  <button class="lang-btn" onclick="toggleLang()">English</button>
+</header>
 
 <div class="container">
-  <h2>إحصائيات النظام</h2>
-
   <div class="cards">
     <div class="card">
-      <h3>عدد المدارس</h3>
-      <span id="schools">0</span>
+      <h3 id="schoolsText">عدد المدارس</h3>
+      <span id="schoolsCount">0</span>
     </div>
-
     <div class="card">
-      <h3>عدد المعلمين</h3>
-      <span id="teachers">0</span>
+      <h3 id="domainsText">المجالات</h3>
+      <span id="domainsCount">0</span>
     </div>
-
     <div class="card">
-      <h3>المحاور</h3>
-      <span id="axes">0</span>
-    </div>
-
-    <div class="card">
-      <h3>المجالات</h3>
-      <span id="domains">0</span>
-    </div>
-
-    <div class="card">
-      <h3>المعايير</h3>
-      <span id="standards">0</span>
+      <h3 id="standardsText">المعايير</h3>
+      <span id="standardsCount">0</span>
     </div>
   </div>
 </div>
 
 <script>
-// أرقام مؤقتة (بنربطها JSON لاحقًا)
-document.getElementById("schools").innerText = 188;
-document.getElementById("teachers").innerText = 125;
-document.getElementById("axes").innerText = 3;
-document.getElementById("domains").innerText = 9;
-document.getElementById("standards").innerText = 61;
+  let currentLang = "ar";
 
-function logout() {
-  window.location.href = "index.html";
-}
+  function toggleLang() {
+    if (currentLang === "ar") {
+      document.documentElement.lang = "en";
+      document.documentElement.dir = "ltr";
+      title.innerText = "Dashboard – School Performance System";
+      schoolsText.innerText = "Schools";
+      domainsText.innerText = "Domains";
+      standardsText.innerText = "Standards";
+      currentLang = "en";
+    } else {
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+      title.innerText = "لوحة التحكم – نظام تقييم أداء المدارس";
+      schoolsText.innerText = "عدد المدارس";
+      domainsText.innerText = "المجالات";
+      standardsText.innerText = "المعايير";
+      currentLang = "ar";
+    }
+  }
+
+  fetch("data/schools.json")
+    .then(res => res.json())
+    .then(data => schoolsCount.innerText = data.length);
+
+  fetch("data/domains.json")
+    .then(res => res.json())
+    .then(data => domainsCount.innerText = data.length);
+
+  fetch("data/standards.json")
+    .then(res => res.json())
+    .then(data => standardsCount.innerText = data.length);
 </script>
 
 </body>
