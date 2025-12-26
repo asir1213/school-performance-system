@@ -1,99 +1,118 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>تسجيل الدخول | نظام تقييم أداء المدارس</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: "Tahoma", Arial;
-  background: linear-gradient(135deg, #eef2ff, #f8fafc);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* الكرت */
-.login-card {
-  background: white;
-  width: 360px;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-  text-align: center;
-}
-
-/* العنوان */
-.login-card h1 {
-  margin-bottom: 10px;
-  color: #1e3a8a;
-  font-size: 22px;
-}
-
-.login-card p {
-  color: #475569;
-  font-size: 14px;
-  margin-bottom: 25px;
-}
-
-/* الحقول */
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  border: 1px solid #cbd5f5;
-  font-size: 14px;
-}
-
-/* الزر */
-button {
-  width: 100%;
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1e40af;
-}
-
-/* رابط */
-.back {
-  display: block;
-  margin-top: 15px;
-  font-size: 13px;
-  color: #2563eb;
-  text-decoration: none;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <style>
+    body {
+      font-family: Tahoma, Arial;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background: white;
+      width: 360px;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #1e3a8a;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1e40af;
+    }
+    .lang {
+      margin-top: 15px;
+      cursor: pointer;
+      color: #2563eb;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="login-card">
-  <h1>تسجيل الدخول</h1>
-  <p>الدخول إلى نظام تقييم أداء المدارس</p>
+<div class="login-box">
+  <h2 id="title">تسجيل الدخول</h2>
 
-  <input type="email" placeholder="البريد الإلكتروني">
-  <input type="password" placeholder="كلمة المرور">
+  <input id="email" type="text" placeholder="البريد الإلكتروني">
+  <input id="password" type="password" placeholder="كلمة المرور">
 
   <button onclick="login()">دخول</button>
 
-  <a class="back" href="index.html">العودة للصفحة الرئيسية</a>
+  <div class="error" id="error"></div>
+
+  <div class="lang" onclick="toggleLang()">English</div>
 </div>
 
 <script>
-function login() {
-  // مؤقتًا بدون تحقق (واجهة فقط)
-  window.location.href = "dashboard.html";
-}
+  let lang = "ar";
+
+  function toggleLang() {
+    if (lang === "ar") {
+      document.documentElement.lang = "en";
+      document.documentElement.dir = "ltr";
+      title.innerText = "Login";
+      email.placeholder = "Email";
+      password.placeholder = "Password";
+      lang = "en";
+    } else {
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+      title.innerText = "تسجيل الدخول";
+      email.placeholder = "البريد الإلكتروني";
+      password.placeholder = "كلمة المرور";
+      lang = "ar";
+    }
+  }
+
+  function login() {
+    fetch("data/users.json")
+      .then(res => res.json())
+      .then(users => {
+        const user = users.find(
+          u => u.email === email.value && u.password === password.value
+        );
+
+        if (user) {
+          window.location.href = "dashboard.html";
+        } else {
+          error.innerText = lang === "ar"
+            ? "بيانات الدخول غير صحيحة"
+            : "Invalid login credentials";
+        }
+      });
+  }
 </script>
 
 </body>
