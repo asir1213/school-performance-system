@@ -6,11 +6,11 @@
   <style>
     body {
       font-family: Tahoma, Arial;
-      background: linear-gradient(135deg, #eef2ff, #f9fafb);
+      background: linear-gradient(135deg, #eef2f7, #f7f9fc);
       height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       margin: 0;
     }
 
@@ -18,22 +18,22 @@
       background: #fff;
       padding: 30px;
       width: 350px;
-      border-radius: 12px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
       text-align: center;
     }
 
     h2 {
-      color: #1e3a8a;
       margin-bottom: 20px;
+      color: #1e3a8a;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       font-size: 14px;
     }
 
@@ -44,7 +44,7 @@
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
     }
 
@@ -56,6 +56,7 @@
       margin-top: 15px;
       color: #2563eb;
       cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -64,42 +65,47 @@
   <div class="login-box">
     <h2>تسجيل الدخول</h2>
 
-    <!-- لاحظ: لا يوجد action -->
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-      <input type="password" id="password" placeholder="كلمة المرور" required>
-      <button type="submit">دخول</button>
-    </form>
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    <input type="password" id="password" placeholder="كلمة المرور">
+
+    <button onclick="login()">دخول</button>
 
     <div class="lang">English</div>
   </div>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault(); // 🔴 مهم جدًا
-
+    function login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      fetch("./data/users.json")
-        .then(res => res.json())
+      if (!email || !password) {
+        alert("يرجى إدخال البريد وكلمة المرور");
+        return;
+      }
+
+      fetch("/school-performance-system/data/users.json")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("فشل تحميل ملف المستخدمين");
+          }
+          return response.json();
+        })
         .then(users => {
           const user = users.find(
             u => u.email === email && u.password === password
           );
 
           if (user) {
-            // نجاح الدخول
             window.location.href = "dashboard.html";
           } else {
             alert("بيانات الدخول غير صحيحة");
           }
         })
-        .catch(err => {
+        .catch(error => {
           alert("خطأ في تحميل المستخدمين");
-          console.error(err);
+          console.error(error);
         });
-    });
+    }
   </script>
 
 </body>
