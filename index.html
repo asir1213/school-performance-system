@@ -2,95 +2,90 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>نظام تقييم أداء المدارس</title>
+  <title>نظام ذكي لتقييم أداء المدارس</title>
   <style>
     body {
       font-family: "Tahoma", Arial;
       background: #f5f7fa;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
-    h1 {
-      text-align: center;
-      color: #1f3c88;
-    }
-    .axis, .domain, .standard {
-      background: #fff;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 10px 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .axis {
-      border-right: 6px solid #1f3c88;
-    }
-    .domain {
-      border-right: 6px solid #4aa3df;
-      margin-right: 20px;
-    }
-    .standard {
-      border-right: 6px solid #7ed957;
-      margin-right: 40px;
-    }
-    ul {
-      margin-right: 60px;
-    }
-    .percent {
-      float: left;
+
+    header {
       background: #1f3c88;
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 14px;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #ffffff;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      margin: 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #1f3c88;
+      border: 1px solid #1f3c88;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      background: #1f3c88;
+      color: white;
+    }
+
+    main {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
   </style>
 </head>
+
 <body>
 
-<h1>📊 نظام ذكي لتقييم أداء المدارس</h1>
+  <header>
+    <h1>📊 نظام ذكي لتقييم أداء المدارس</h1>
+    <p>منصة إلكترونية لدعم التقويم المدرسي وفق معايير وزارة التربية والتعليم</p>
+  </header>
 
-<div id="app"></div>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="supervisor.html">لوحة المشرف</a>
+    <a href="report.html">التقارير</a>
+    <a href="upload.html">رفع الأدلة</a>
+  </nav>
 
-<script>
-fetch("../backend/models/standards.json")
-  .then(res => res.json())
-  .then(data => {
-    const app = document.getElementById("app");
+  <main>
+    <div class="box">
+      <h2>🎯 أهداف النظام</h2>
+      <p>
+        تمكين المدارس من متابعة أدائها وفق المحاور، المجالات، المعايير، والمؤشرات
+        بطريقة رقمية سهلة واحترافية.
+      </p>
+    </div>
 
-    Object.values(data).forEach(axis => {
-      const axisDiv = document.createElement("div");
-      axisDiv.className = "axis";
-      axisDiv.innerHTML = `<strong>${axis.name}</strong>`;
-
-      axis.domains.forEach(domain => {
-        const domainDiv = document.createElement("div");
-        domainDiv.className = "domain";
-        domainDiv.innerHTML = `<strong>${domain.name}</strong>`;
-
-        domain.standards.forEach(standard => {
-          const stdDiv = document.createElement("div");
-          stdDiv.className = "standard";
-
-          const indicators = standard.indicators.length;
-          const percent = Math.round((indicators / indicators) * 100);
-
-          stdDiv.innerHTML = `
-            <span class="percent">${percent}%</span>
-            <strong>${standard.name}</strong>
-            <ul>
-              ${standard.indicators.map(i => `<li>${i}</li>`).join("")}
-            </ul>
-          `;
-          domainDiv.appendChild(stdDiv);
-        });
-
-        axisDiv.appendChild(domainDiv);
-      });
-
-      app.appendChild(axisDiv);
-    });
-  });
-</script>
+    <div class="box">
+      <h2>👥 الفئات المستفيدة</h2>
+      <p>
+        مديري المدارس – المشرفين – المعلمين – فرق الجودة
+      </p>
+    </div>
+  </main>
 
 </body>
 </html>
