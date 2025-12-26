@@ -95,7 +95,8 @@
           );
 
           if (user) {
-            window.location.href = "dashboard.html";
+            localStorage.setItem("user", JSON.stringify(user));
+window.location.href = "dashboard.html";
           } else {
             alert("بيانات الدخول غير صحيحة");
           }
