@@ -1,117 +1,116 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>لوحة التحكم | نظام تقييم أداء المدارس</title>
+<meta charset="UTF-8">
+<title>لوحة التحكم | نظام تقييم أداء المدارس</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial;
-      background: #f4f7fb;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Tahoma, Arial;
+  background: #f4f7fb;
+}
 
-    /* الشريط العلوي */
-    header {
-      background: #1f3c88;
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  background: #1f3c88;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    header .title {
-      font-size: 18px;
-      font-weight: bold;
-    }
+header .title {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-    header .user-info {
-      font-size: 14px;
-    }
+header .user-info {
+  font-size: 14px;
+}
 
-    header button {
-      background: #ef4444;
-      border: none;
-      color: white;
-      padding: 7px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
+header button {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
 
-    /* المحتوى */
-    .container {
-      padding: 30px;
-    }
+.container {
+  padding: 30px;
+}
 
-    .welcome {
-      margin-bottom: 25px;
-      color: #1f3c88;
-      font-size: 18px;
-    }
+.welcome {
+  margin-bottom: 25px;
+  color: #1f3c88;
+  font-size: 18px;
+}
 
-    /* الكروت */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
 
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      text-align: center;
-    }
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
 
-    .card h3 {
-      margin: 0;
-      font-size: 15px;
-      color: #555;
-    }
+.card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}
 
-    .card span {
-      display: block;
-      margin-top: 12px;
-      font-size: 34px;
-      font-weight: bold;
-      color: #1f3c88;
-    }
+.card span {
+  display: block;
+  margin-top: 12px;
+  font-size: 34px;
+  font-weight: bold;
+  color: #1f3c88;
+}
 
-    /* أزرار الإجراءات */
-    .actions {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
+.actions {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
 
-    .action-btn {
-      background: linear-gradient(135deg, #1f3c88, #2563eb);
-      color: white;
-      text-decoration: none;
-      padding: 18px;
-      border-radius: 14px;
-      text-align: center;
-      font-size: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: 0.3s;
-    }
+.action-btn {
+  background: linear-gradient(135deg, #1f3c88, #2563eb);
+  color: white;
+  text-decoration: none;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
 
-    .action-btn:hover {
-      transform: translateY(-4px);
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-    }
-  </style>
+.action-btn:hover {
+  transform: translateY(-4px);
+}
+
+/* إخفاء العناصر */
+.hidden {
+  display: none;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="title">لوحة التحكم – نظام تقييم أداء المدارس</div>
-
   <div class="user-info">
     <span id="userName"></span>
     <button onclick="logout()">تسجيل الخروج</button>
@@ -123,7 +122,7 @@
   <div class="welcome" id="welcomeText"></div>
 
   <div class="cards">
-    <div class="card">
+    <div class="card" id="schoolsCard">
       <h3>عدد المدارس</h3>
       <span id="schoolsCount">0</span>
     </div>
@@ -145,56 +144,55 @@
   </div>
 
   <div class="actions">
-    <a href="#" class="action-btn">رفع الأدلة</a>
+    <a href="#" class="action-btn" id="uploadBtn">رفع الأدلة</a>
     <a href="#" class="action-btn">التقارير</a>
-    <a href="#" class="action-btn">إدارة المستخدمين</a>
+    <a href="#" class="action-btn" id="usersBtn">إدارة المستخدمين</a>
   </div>
 
 </div>
 
 <script>
-  /* 🔐 التحقق من تسجيل الدخول */
-  const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) {
-    window.location.href = "login.html";
-  }
+if (!user) {
+  window.location.href = "login.html";
+}
 
-  document.getElementById("userName").innerText = user.name;
-  document.getElementById("welcomeText").innerText =
-    "مرحبًا " + user.name + " – الدور: " + user.role;
+document.getElementById("userName").innerText = user.name;
+document.getElementById("welcomeText").innerText =
+  "مرحبًا " + user.name + " – الدور: " + user.role;
 
-  /* 🔴 تسجيل الخروج */
-  function logout() {
-    localStorage.removeItem("user");
-    window.location.href = "login.html";
-  }
+// صلاحيات
+if (user.role === "teacher") {
+  document.getElementById("schoolsCard").classList.add("hidden");
+  document.getElementById("usersBtn").classList.add("hidden");
+}
 
-  /* 📊 تحميل الإحصائيات */
-  fetch("data/schools.json")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("schoolsCount").innerText = data.length;
-    });
+if (user.role === "supervisor") {
+  document.getElementById("usersBtn").classList.add("hidden");
+}
 
-  fetch("data/users.json")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("usersCount").innerText = data.length;
-    });
+// إحصائيات
+fetch("data/schools.json")
+  .then(res => res.json())
+  .then(data => schoolsCount.innerText = data.length);
 
-  fetch("data/domains.json")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("domainsCount").innerText = data.length;
-    });
+fetch("data/users.json")
+  .then(res => res.json())
+  .then(data => usersCount.innerText = data.length);
 
-  fetch("data/standards.json")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("standardsCount").innerText = data.length;
-    });
+fetch("data/domains.json")
+  .then(res => res.json())
+  .then(data => domainsCount.innerText = data.length);
 
+fetch("data/standards.json")
+  .then(res => res.json())
+  .then(data => standardsCount.innerText = data.length);
+
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "login.html";
+}
 </script>
 
 </body>
