@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة المعلم | نظام تقويم الأداء المدرسي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: "Tahoma", Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #1f3a5f;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      padding: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .progress {
+      height: 14px;
+      background: #e0e0e0;
+      border-radius: 7px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 72%;
+      background: #f4a261; /* جيد */
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2a9d8f;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+    }
+    th {
+      background: #f0f2f5;
+    }
+    .status-ok { color: #2a9d8f; font-weight: bold; }
+    .status-wait { color: #f4a261; font-weight: bold; }
+    .status-no { color: #e63946; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>لوحة المعلم</div>
+  <div>مدرسة بحر عمان</div>
+</header>
+
+<div class="container">
+
+  <!-- بطاقة الإتقان -->
+  <div class="card">
+    <h3>نسبة الإتقان</h3>
+    <strong>72% — جيد</strong>
+    <div class="progress">
+      <span></span>
+    </div>
+  </div>
+
+  <!-- إحصائيات سريعة -->
+  <div class="card stats">
+    <div class="stat">
+      <div>الأدلة</div>
+      <strong>12</strong>
+    </div>
+    <div class="stat">
+      <div>قيد المراجعة</div>
+      <strong>3</strong>
+    </div>
+    <div class="stat">
+      <div>معتمدة</div>
+      <strong>8</strong>
+    </div>
+    <div class="stat">
+      <div>مرفوضة</div>
+      <strong>1</strong>
+    </div>
+  </div>
+
+  <!-- زر رفع دليل -->
+  <a class="btn" href="#">➕ رفع دليل جديد</a>
+
+  <!-- جدول الأدلة -->
+  <div class="card">
+    <h3>أدلتي</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>العنوان</th>
+          <th>المجال</th>
+          <th>الحالة</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>تقرير تقويم ذاتي</td>
+          <td>التقويم الذاتي</td>
+          <td class="status-ok">معتمد</td>
+          <td>10/03/2025</td>
+        </tr>
+        <tr>
+          <td>خطة تحسين</td>
+          <td>تحليل نواتج التعلم</td>
+          <td class="status-wait">قيد المراجعة</td>
+          <td>15/03/2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>
