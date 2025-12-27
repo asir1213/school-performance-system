@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المساعد الذكي | نظام تقييم أداء المدارس</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:#f4f6f9;
+}
+header{
+  background:#1f3c88;
+  color:#fff;
+  padding:20px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.container{
+  padding:30px;
+}
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+  margin-bottom:25px;
+}
+.card h3{
+  margin-top:0;
+  color:#1f3c88;
+}
+.alert{
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+.low{background:#fee2e2;color:#991b1b}
+.mid{background:#fef3c7;color:#92400e}
+.good{background:#dcfce7;color:#166534}
+.back{
+  background:#eee;
+  color:#333;
+  padding:8px 14px;
+  border-radius:6px;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🤖 المساعد الذكي للتقويم</h2>
+  <a href="dashboard.html" class="back">⬅ رجوع</a>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>📊 تحليل عام</h3>
+    <div id="summary"></div>
+  </div>
+
+  <div class="card">
+    <h3>⚠️ مجالات تحتاج أولوية تطوير</h3>
+    <div id="weakness"></div>
+  </div>
+
+  <div class="card">
+    <h3>✅ توصيات ذكية</h3>
+    <div id="recommendations"></div>
+  </div>
+
+</div>
+
+<script>
+// حماية
+if(!localStorage.getItem("loggedIn")){
+  window.location.href="login.html";
+}
+
+const evidences = JSON.parse(localStorage.getItem("evidences")) || [];
+
+function countBy(key){
+  const map = {};
+  evidences.forEach(e=>{
+    map[e[key]] = (map[e[key]] || 0) + 1;
+  });
+  return map;
+}
+
+const axisData = countBy("axis");
+const domainData = countBy("domain");
+
+const summary = document.getElementById("summary");
+const weakness = document.getElementById("weakness");
+const rec = document.getElementById("recommendations");
+
+summary.innerHTML = `
+<p>عدد الأدلة الكلي: <strong>${evidences.length}</strong></p>
+<p>عدد المحاور الموثقة: <strong>${Object.keys(axisData).length}</strong></p>
+<p>عدد المجالات الموثقة: <strong>${Object.keys(domainData).length}</strong></p>
+`;
+
+Object.keys(domainData).forEach(domain=>{
+  if(domainData[domain] <= 1){
+    weakness.innerHTML += `
+      <div class="alert low">
+        🔴 ضعف في توثيق مجال <strong>${domain}</strong>
+      </div>
+    `;
+  } else if(domainData[domain] <= 3){
+    weakness.innerHTML += `
+      <div class="alert mid">
+        🟡 توثيق متوسط في مجال <strong>${domain}</strong>
+      </div>
+    `;
+  }
+});
+
+if(weakness.innerHTML===""){
+  weakness.innerHTML = `
+    <div class="alert good">
+      🟢 جميع المجالات موثقة بشكل جيد
+    </div>
+  `;
+}
+
+rec.innerHTML = `
+<ul>
+  <li>تعزيز توثيق المجالات ذات الأدلة المحدودة.</li>
+  <li>تنويع الأدلة بين تخطيط، تنفيذ، وتقويم.</li>
+  <li>التركيز على رفع أدلة نوعية تعكس الأثر التعليمي.</li>
+  <li>الاستفادة من نتائج التقارير في إعداد خطة تحسين.</li>
+</ul>
+`;
+</script>
+
+</body>
+</html>
