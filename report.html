@@ -1,165 +1,136 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>تقرير التقويم الذاتي | نظام تقويم الأداء المدرسي</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      color: #333;
-    }
-    .page {
-      background: #fff;
-      max-width: 900px;
-      margin: 24px auto;
-      padding: 32px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h1, h2, h3 {
-      color: #1f3a5f;
-    }
-    .center {
-      text-align: center;
-    }
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-    .good {
-      background: #2a9d8f;
-      color: #fff;
-    }
-    .mid {
-      background: #f4a261;
-      color: #fff;
-    }
-    .low {
-      background: #e63946;
-      color: #fff;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: right;
-    }
-    th {
-      background: #f0f2f5;
-    }
-    .section {
-      margin-top: 32px;
-    }
-    ul {
-      margin-top: 8px;
-      line-height: 1.8;
-    }
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      color: #666;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>التقارير | نظام تقييم أداء المدارس</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:#f4f6f9;
+}
+
+header{
+  background:#1f3c88;
+  color:#fff;
+  padding:20px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h2{margin:0}
+
+.container{
+  padding:30px;
+}
+
+.charts{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.card h3{
+  margin-top:0;
+  color:#1f3c88;
+  text-align:center;
+}
+.back{
+  background:#eee;
+  color:#333;
+  padding:8px 14px;
+  border-radius:6px;
+  text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
-<div class="page">
+<header>
+  <h2>📄 التقارير والإحصائيات</h2>
+  <a href="dashboard.html" class="back">⬅ رجوع</a>
+</header>
 
-  <!-- الغلاف -->
-  <div class="center">
-    <h1>تقرير التقويم الذاتي</h1>
-    <h3>مدرسة بحر عمان للتعليم الأساسي (1–12)</h3>
-    <p>العام الدراسي 2024 / 2025</p>
-    <span class="badge mid">نسبة الإتقان العامة: 78% — جيد جدًا</span>
-  </div>
+<div class="container">
 
-  <!-- الملخص التنفيذي -->
-  <div class="section">
-    <h2>الملخص التنفيذي</h2>
-    <p>
-      أظهرت نتائج التقويم الذاتي أن المدرسة حققت نسبة إتقان عامة بلغت
-      <strong>78%</strong>، مما يعكس مستوى <strong>جيد جدًا</strong> في الأداء
-      المدرسي. وتبرز قوة المدرسة في مجالات التدريس والتقويم، في حين تظهر
-      الحاجة إلى مزيد من التطوير في مجال تحليل نواتج التعلم.
-    </p>
-  </div>
+  <div class="charts">
 
-  <!-- تحليل المحاور -->
-  <div class="section">
-    <h2>تحليل المحاور</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>المحور</th>
-          <th>نسبة الإتقان</th>
-          <th>التوصيف</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>جودة التعليم والتعلم</td>
-          <td>82%</td>
-          <td><span class="badge good">متميز</span></td>
-        </tr>
-        <tr>
-          <td>القيادة والإدارة المدرسية</td>
-          <td>75%</td>
-          <td><span class="badge mid">جيد جدًا</span></td>
-        </tr>
-        <tr>
-          <td>ضمان نواتج التعلم وعمليات المدرسة</td>
-          <td>68%</td>
-          <td><span class="badge mid">جيد</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="card">
+      <h3>حسب المحاور</h3>
+      <canvas id="axesChart"></canvas>
+    </div>
 
-  <!-- نقاط القوة -->
-  <div class="section">
-    <h2>نقاط القوة</h2>
-    <ul>
-      <li>توثيق جيد للأدلة الصفية.</li>
-      <li>تنوع استراتيجيات التدريس.</li>
-      <li>التزام الكادر التعليمي برفع الأدلة.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h3>حسب الحالة</h3>
+      <canvas id="statusChart"></canvas>
+    </div>
 
-  <!-- أولويات التطوير -->
-  <div class="section">
-    <h2>أولويات التطوير</h2>
-    <ul>
-      <li>تعزيز تحليل نتائج الاختبارات.</li>
-      <li>ربط نتائج التقويم بخطط التحسين.</li>
-      <li>متابعة تنفيذ الخطط التحسينية بشكل دوري.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h3>أداء المدارس</h3>
+      <canvas id="schoolsChart"></canvas>
+    </div>
 
-  <!-- الخاتمة -->
-  <div class="section">
-    <h2>الخاتمة</h2>
-    <p>
-      بناءً على نتائج التقويم الذاتي، تلتزم المدرسة بتنفيذ خطط التحسين وفق
-      الأولويات المحددة، وبما يسهم في رفع جودة الأداء وتحقيق نواتج تعلم أفضل
-      للطلبة.
-    </p>
-  </div>
-
-  <div class="footer">
-    تم إنشاء هذا التقرير آليًا عبر نظام تقويم الأداء المدرسي
   </div>
 
 </div>
+
+<script>
+// حماية
+if(!localStorage.getItem("loggedIn")){
+  window.location.href="login.html";
+}
+
+// مخطط المحاور
+new Chart(document.getElementById('axesChart'),{
+  type:'bar',
+  data:{
+    labels:['جودة التعلم','الإدارة','البيئة'],
+    datasets:[{
+      label:'النسبة',
+      data:[80,65,90],
+      backgroundColor:'#1f3c88'
+    }]
+  }
+});
+
+// مخطط الحالة
+new Chart(document.getElementById('statusChart'),{
+  type:'doughnut',
+  data:{
+    labels:['مكتمل','قيد المراجعة','ناقص'],
+    datasets:[{
+      data:[120,45,23],
+      backgroundColor:['#28a745','#ffc107','#dc3545']
+    }]
+  }
+});
+
+// مخطط المدارس
+new Chart(document.getElementById('schoolsChart'),{
+  type:'line',
+  data:{
+    labels:['مدرسة 1','مدرسة 2','مدرسة 3','مدرسة 4'],
+    datasets:[{
+      label:'التقييم',
+      data:[85,72,90,68],
+      borderColor:'#1f3c88',
+      fill:false
+    }]
+  }
+});
+</script>
 
 </body>
 </html>
