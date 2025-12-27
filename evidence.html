@@ -1,107 +1,145 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>إدارة الأدلة</title>
-  <style>
-    body {
-      font-family: Tahoma, Arial;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 30px;
-    }
-    h1 {
-      text-align: center;
-      color: #1f3c88;
-      margin-bottom: 30px;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-    }
-    .card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,.08);
-      margin-bottom: 25px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #1f3c88;
-      color: #fff;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #162f6a;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background: #eef2ff;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>رفع الأدلة | نظام تقييم أداء المدارس</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:#f4f6f9;
+}
+
+header{
+  background:#1f3c88;
+  color:#fff;
+  padding:20px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h2{margin:0}
+
+.container{
+  padding:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.form-card, .list-card{
+  background:#fff;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+  margin-bottom:30px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+input, select, textarea{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+textarea{grid-column:1/-1}
+
+button{
+  background:#1f3c88;
+  color:#fff;
+  border:none;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+button:hover{opacity:.9}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:center;
+}
+
+th{
+  background:#f1f3f7;
+  color:#1f3c88;
+}
+
+.back{
+  background:#eee;
+  color:#333;
+  padding:8px 14px;
+  border-radius:6px;
+  text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
-<h1>📁 إدارة الأدلة</h1>
+<header>
+  <h2>📁 رفع الأدلة</h2>
+  <a href="dashboard.html" class="back">⬅ رجوع</a>
+</header>
 
 <div class="container">
 
-  <!-- رفع دليل -->
-  <div class="card">
-    <h3>➕ إضافة دليل جديد</h3>
+  <!-- نموذج الرفع -->
+  <div class="form-card">
+    <h3>إضافة دليل جديد</h3>
+    <div class="form-grid">
+      <select id="axis">
+        <option>اختر المحور</option>
+        <option>جودة التعلم</option>
+        <option>الإدارة المدرسية</option>
+        <option>البيئة التعليمية</option>
+      </select>
 
-    <label>اسم المدرسة</label>
-    <input type="text" id="school">
+      <select id="domain">
+        <option>اختر المجال</option>
+        <option>التخطيط</option>
+        <option>التقويم</option>
+        <option>التنمية المهنية</option>
+      </select>
 
-    <label>المجال</label>
-    <input type="text" id="domain">
+      <select id="standard">
+        <option>اختر المعيار</option>
+        <option>تنفيذ خطط التحسين</option>
+        <option>توثيق نتائج التقويم</option>
+        <option>متابعة الأداء</option>
+      </select>
 
-    <label>المعيار</label>
-    <input type="text" id="standard">
-
-    <label>ملف الدليل</label>
-    <input type="file" id="file">
-
-    <button onclick="addEvidence()">حفظ الدليل</button>
+      <input type="file" id="file">
+      <textarea id="desc" placeholder="وصف الدليل..."></textarea>
+      <button onclick="addEvidence()">💾 حفظ الدليل</button>
+    </div>
   </div>
 
   <!-- عرض الأدلة -->
-  <div class="card">
-    <h3>📊 الأدلة المرفوعة</h3>
-
+  <div class="list-card">
+    <h3>📄 الأدلة المرفوعة</h3>
     <table>
       <thead>
         <tr>
-          <th>المدرسة</th>
+          <th>المحور</th>
           <th>المجال</th>
           <th>المعيار</th>
-          <th>الحالة</th>
+          <th>الوصف</th>
+          <th>الملف</th>
         </tr>
       </thead>
       <tbody id="evidenceTable"></tbody>
@@ -111,46 +149,49 @@
 </div>
 
 <script>
-  let evidences = [];
+// حماية الدخول
+if(!localStorage.getItem("loggedIn")){
+  window.location.href="login.html";
+}
 
-  function addEvidence() {
-    const school = document.getElementById("school").value;
-    const domain = document.getElementById("domain").value;
-    const standard = document.getElementById("standard").value;
+let evidences = JSON.parse(localStorage.getItem("evidences")) || [];
 
-    if (!school || !domain || !standard) {
-      alert("الرجاء تعبئة جميع الحقول");
-      return;
-    }
+function addEvidence(){
+  const axis=document.getElementById('axis').value;
+  const domain=document.getElementById('domain').value;
+  const standard=document.getElementById('standard').value;
+  const desc=document.getElementById('desc').value;
+  const file=document.getElementById('file').files[0];
 
-    evidences.push({
-      school,
-      domain,
-      standard,
-      status: "قيد المراجعة"
-    });
-
-    renderTable();
-    document.getElementById("school").value = "";
-    document.getElementById("domain").value = "";
-    document.getElementById("standard").value = "";
+  if(!file){
+    alert("يرجى اختيار ملف");
+    return;
   }
 
-  function renderTable() {
-    const table = document.getElementById("evidenceTable");
-    table.innerHTML = "";
+  evidences.push({
+    axis,domain,standard,desc,file:file.name
+  });
 
-    evidences.forEach(e => {
-      table.innerHTML += `
-        <tr>
-          <td>${e.school}</td>
-          <td>${e.domain}</td>
-          <td>${e.standard}</td>
-          <td>⏳ ${e.status}</td>
-        </tr>
-      `;
-    });
-  }
+  localStorage.setItem("evidences",JSON.stringify(evidences));
+  render();
+}
+
+function render(){
+  const table=document.getElementById('evidenceTable');
+  table.innerHTML="";
+  evidences.forEach(e=>{
+    table.innerHTML+=`
+      <tr>
+        <td>${e.axis}</td>
+        <td>${e.domain}</td>
+        <td>${e.standard}</td>
+        <td>${e.desc}</td>
+        <td>📎 ${e.file}</td>
+      </tr>`;
+  });
+}
+
+render();
 </script>
 
 </body>
