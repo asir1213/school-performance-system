@@ -9,47 +9,74 @@ body {
   margin: 0;
   font-family: Tahoma, Arial;
   background: #f4f7fb;
+  display: flex;
 }
 
-header {
+/* Sidebar */
+.sidebar {
+  width: 260px;
   background: #1f3c88;
   color: white;
-  padding: 15px 30px;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.sidebar a:hover {
+  background: #2563eb;
+}
+
+.sidebar a.hidden {
+  display: none;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Header */
+.header {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-header .title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-header .user-info {
+.header .user {
   font-size: 14px;
 }
 
-header button {
+.header button {
   background: #ef4444;
-  border: none;
   color: white;
-  padding: 7px 14px;
+  border: none;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  margin-right: 10px;
 }
 
-.container {
-  padding: 30px;
-}
-
-.welcome {
-  margin-bottom: 25px;
-  color: #1f3c88;
-  font-size: 18px;
-}
-
+/* Cards */
 .cards {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
@@ -71,36 +98,12 @@ header button {
 
 .card span {
   display: block;
-  margin-top: 12px;
-  font-size: 34px;
+  margin-top: 10px;
+  font-size: 32px;
   font-weight: bold;
   color: #1f3c88;
 }
 
-.actions {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.action-btn {
-  background: linear-gradient(135deg, #1f3c88, #2563eb);
-  color: white;
-  text-decoration: none;
-  padding: 18px;
-  border-radius: 14px;
-  text-align: center;
-  font-size: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: 0.3s;
-}
-
-.action-btn:hover {
-  transform: translateY(-4px);
-}
-
-/* إخفاء العناصر */
 .hidden {
   display: none;
 }
@@ -109,17 +112,22 @@ header button {
 
 <body>
 
-<header>
-  <div class="title">لوحة التحكم – نظام تقييم أداء المدارس</div>
-  <div class="user-info">
-    <span id="userName"></span>
-    <button onclick="logout()">تسجيل الخروج</button>
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>نظام التقييم</h2>
+  <a href="#">الرئيسية</a>
+  <a href="#" id="menuUpload">رفع الأدلة</a>
+  <a href="#">التقارير</a>
+  <a href="#" id="menuUsers">إدارة المستخدمين</a>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <div class="header">
+    <div class="user" id="userInfo"></div>
+    <button onclick="logout()">خروج</button>
   </div>
-</header>
-
-<div class="container">
-
-  <div class="welcome" id="welcomeText"></div>
 
   <div class="cards">
     <div class="card" id="schoolsCard">
@@ -143,12 +151,6 @@ header button {
     </div>
   </div>
 
-  <div class="actions">
-    <a href="#" class="action-btn" id="uploadBtn">رفع الأدلة</a>
-    <a href="#" class="action-btn">التقارير</a>
-    <a href="#" class="action-btn" id="usersBtn">إدارة المستخدمين</a>
-  </div>
-
 </div>
 
 <script>
@@ -158,21 +160,20 @@ if (!user) {
   window.location.href = "login.html";
 }
 
-document.getElementById("userName").innerText = user.name;
-document.getElementById("welcomeText").innerText =
-  "مرحبًا " + user.name + " – الدور: " + user.role;
+document.getElementById("userInfo").innerText =
+  user.name + " | " + user.role;
 
-// صلاحيات
+/* صلاحيات */
 if (user.role === "teacher") {
   document.getElementById("schoolsCard").classList.add("hidden");
-  document.getElementById("usersBtn").classList.add("hidden");
+  document.getElementById("menuUsers").classList.add("hidden");
 }
 
 if (user.role === "supervisor") {
-  document.getElementById("usersBtn").classList.add("hidden");
+  document.getElementById("menuUsers").classList.add("hidden");
 }
 
-// إحصائيات
+/* إحصائيات */
 fetch("data/schools.json")
   .then(res => res.json())
   .then(data => schoolsCount.innerText = data.length);
