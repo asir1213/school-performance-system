@@ -2,176 +2,128 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>نظام تقييم أداء المدارس</title>
+<title>نظام بُصرة لتقويم الأداء المدرسي</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Tahoma", Arial;
-  background: #f4f7fb;
-  color: #1e293b;
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:linear-gradient(135deg,#f4f6f9,#e8ecf3);
 }
 
-/* الشريط العلوي */
-header {
-  background: #ffffff;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px;
+  text-align:center;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #1e3a8a;
+h1{
+  color:#1f3c88;
+  font-size:36px;
+  margin-bottom:10px;
 }
 
-.login-btn {
-  background: #2563eb;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 14px;
+.subtitle{
+  font-size:18px;
+  color:#555;
+  margin-bottom:40px;
 }
 
-/* الهيرو */
-.hero {
-  text-align: center;
-  padding: 60px 20px 40px;
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
 }
 
-.hero h1 {
-  font-size: 28px;
-  color: #1e3a8a;
+.card{
+  background:#fff;
+  padding:30px 20px;
+  border-radius:18px;
+  box-shadow:0 12px 25px rgba(0,0,0,.08);
 }
 
-.hero p {
-  margin-top: 10px;
-  color: #475569;
+.card h3{
+  color:#1f3c88;
+  margin-top:0;
 }
 
-.hero .main-btn {
-  margin-top: 25px;
-  display: inline-block;
-  background: #1e40af;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 16px;
+.card p{
+  font-size:14px;
+  color:#555;
+  line-height:1.7;
 }
 
-/* المحاور */
-.section {
-  padding: 40px;
-  max-width: 1200px;
-  margin: auto;
+.card a{
+  display:inline-block;
+  margin-top:15px;
+  background:#1f3c88;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:15px;
 }
 
-.section h2 {
-  text-align: center;
-  color: #1e3a8a;
-  margin-bottom: 30px;
+.card a:hover{
+  background:#2563eb;
 }
 
-/* كروت المحاور */
-.axis-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.axis-title {
-  background: #16a34a;
-  color: white;
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-/* المجالات */
-.domains {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.domain {
-  background: #f8fafc;
-  border-radius: 14px;
-  padding: 20px;
-  text-align: center;
-}
-
-.domain h3 {
-  color: #1e3a8a;
-  font-size: 16px;
-}
-
-.domain p {
-  font-size: 13px;
-  color: #475569;
-  margin: 10px 0;
-}
-
-.domain a {
-  display: inline-block;
-  margin-top: 10px;
-  background: #2563eb;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 13px;
+.footer{
+  margin-top:50px;
+  font-size:13px;
+  color:#666;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">📊 نظام تقييم أداء المدارس</div>
-  <a class="login-btn" href="login.html">تسجيل الدخول</a>
-</header>
+<div class="container">
 
-<div class="hero">
-  <h1>نظام وطني ذكي لتقييم أداء المدارس</h1>
-  <p>نحو مدارس متميزة في الأداء، متطورة في نتائجها</p>
-  <a class="main-btn" href="login.html">ابدأ الآن</a>
-</div>
+  <h1>نظام بُصرة</h1>
+  <div class="subtitle">
+    منصة ذكية لتقويم الأداء المدرسي وتحليل الأدلة ودعم التحسين المستمر
+  </div>
 
-<div class="section">
-  <h2>المحاور الرئيسية والمجالات التابعة لها</h2>
+  <div class="cards">
 
-  <div class="axis-card">
-    <div class="axis-title">المحور الثالث: ضمان جودة نواتج التعلم وعمليات المدرسة</div>
-
-    <div class="domains">
-      <div class="domain">
-        <h3>التقويم الذاتي المدرسي</h3>
-        <p>قياس الأداء وتحليل النتائج وتحسين الممارسات</p>
-        <a href="login.html">دخول</a>
-      </div>
-
-      <div class="domain">
-        <h3>التقويم الخارجي</h3>
-        <p>متابعة الأداء وفق معايير الوزارة</p>
-        <a href="login.html">دخول</a>
-      </div>
-
-      <div class="domain">
-        <h3>تحسين نواتج التعلم</h3>
-        <p>تحليل النتائج وخطط التحسين</p>
-        <a href="login.html">دخول</a>
-      </div>
+    <div class="card">
+      <h3>🏠 لوحة التحكم</h3>
+      <p>
+        نظرة شاملة على أداء المدرسة، عدد الأدلة، المجالات، والمعايير
+      </p>
+      <a href="dashboard.html">الدخول</a>
     </div>
+
+    <div class="card">
+      <h3>📁 إدارة الأدلة</h3>
+      <p>
+        رفع الأدلة، متابعتها، اعتمادها، وإضافة الملاحظات
+      </p>
+      <a href="evidence.html">عرض الأدلة</a>
+    </div>
+
+    <div class="card">
+      <h3>📊 التقارير الذكية</h3>
+      <p>
+        رسوم بيانية، إحصائيات، وتصدير تقارير PDF و Excel
+      </p>
+      <a href="report.html">عرض التقارير</a>
+    </div>
+
+    <div class="card">
+      <h3>🤖 المساعد الذكي</h3>
+      <p>
+        تحليل الأداء واقتراح أولويات التطوير والجوانب التحسينية
+      </p>
+      <a href="assistant.html">تشغيل المساعد</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © نظام بُصرة لتقويم الأداء المدرسي – نسخة تجريبية
   </div>
 
 </div>
