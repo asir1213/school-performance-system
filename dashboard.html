@@ -1,315 +1,152 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>بَصْرَة | لوحة التحكم</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-body{
-  margin:0;
-  font-family:Tahoma,Arial;
-  background:#f4f6f9;
-}
-header{
-  background:#1e3a8a;
-  color:#fff;
-  padding:18px 30px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-/* القائمة الجانبية */
-.sidebar{
-  position:fixed;
-  right:0;
-  top:70px;
-  width:220px;
-  height:100%;
-  background:#fff;
-  border-left:1px solid #ddd;
-}
-.sidebar a{
-  display:block;
-  padding:15px 20px;
-  color:#1e3a8a;
-  text-decoration:none;
-  font-weight:bold;
-}
-.sidebar a:hover{
-  background:#eef2ff;
-}
-
-/* المحتوى */
-.main{
-  margin-right:240px;
-  padding:25px;
-}
-
-/* الإحصائيات */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-.stat{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
-.stat h4{
-  margin:0;
-  color:#555;
-  font-size:14px;
-}
-.stat span{
-  font-size:30px;
-  font-weight:bold;
-  margin-top:8px;
-  display:block;
-}
-
-/* الرسوم */
-.charts{
-  margin-top:30px;
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  flex-wrap:wrap;
-}
-.box{
-  background:#fff;
-  padding:15px;
-  border-radius:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-  width:420px;
-  height:220px;
-}
-canvas{
-  max-height:150px !important;
-}
-
-/* الأقسام */
-.sections{
-  margin-top:40px;
-}
-.sections h3{
-  margin-bottom:20px;
-}
-.section-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.section{
-  padding:15px;
-}
-
-.section h4{
-  font-size:15px;
-}
-
-.section p{
-  font-size:13px;
-}
-.section{
-  background:#fff;
-  border-radius:12px;
-  padding:20px;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
-.section h4{
-  margin:0 0 10px 0;
-}
-.section p{
-  font-size:14px;
-  color:#555;
-}
-.section a{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 15px;
-  background:#1e3a8a;
-  color:#fff;
-  text-decoration:none;
-  border-radius:6px;
-  font-size:14px;
-}
-.section a:hover{
-  background:#162d6a;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>بصيرة – لوحة التحكم</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<header>
-بصرة – نظام تقويم أداء المدارس | لوحة التحكم
-</header>
-
-<div class="sidebar">
-  <a href="dashboard.html">لوحة التحكم</a>
-  <a href="upload.html">رفع دليل</a>
-  <a href="department.html">عرض الأدلة</a>
-  <a href="reports.html">التقارير</a>
+<div class="topbar">
+  بصيرة – نظام تقويم أداء المدارس | لوحة التحكم
 </div>
 
-<div class="main">
+<div class="layout">
 
-<!-- الإحصائيات -->
-<div class="stats">
-  <div class="stat">
-    <h4>إجمالي الأدلة</h4>
-    <span>120</span>
-  </div>
-  <div class="stat">
-    <h4>قيد المراجعة</h4>
-    <span style="color:#d97706">35</span>
-  </div>
-  <div class="stat">
-    <h4>المعتمدة</h4>
-    <span style="color:#16a34a">70</span>
-  </div>
-  <div class="stat">
-    <h4>المرفوضة</h4>
-    <span style="color:#dc2626">15</span>
-  </div>
-</div>
-
-<!-- الرسوم -->
-<div class="charts">
-
-  <div class="box">
-    <h4>حالة الأدلة</h4>
-    <canvas id="statusChart"></canvas>
+  <!-- القائمة الجانبية -->
+  <div class="sidebar">
+    <a href="dashboard.html" class="active">لوحة التحكم</a>
+    <a href="upload.html">رفع دليل</a>
+    <a href="evidence.html">عرض الأدلة</a>
+    <a href="report.html">التقارير</a>
   </div>
 
-  <div class="box">
-    <h4>الأدلة حسب المجالات</h4>
-    <canvas id="domainChart"></canvas>
+  <!-- المحتوى -->
+  <div class="content">
+
+    <!-- البطاقات -->
+    <div class="cards">
+      <div class="card">
+        <h3>إجمالي الأدلة</h3>
+        <span>120</span>
+      </div>
+      <div class="card">
+        <h3>قيد المراجعة</h3>
+        <span style="color:#f59e0b">35</span>
+      </div>
+      <div class="card">
+        <h3>المعتمدة</h3>
+        <span style="color:#16a34a">70</span>
+      </div>
+      <div class="card">
+        <h3>المرفوضة</h3>
+        <span style="color:#dc2626">15</span>
+      </div>
+    </div>
+
+    <!-- الرسوم -->
+    <div class="charts">
+      <div class="chart-box">
+        <h3 style="text-align:center">حالة الأدلة</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h3 style="text-align:center">الأدلة حسب المجالات</h3>
+        <canvas id="domainChart"></canvas>
+      </div>
+    </div>
+
+    <!-- الأقسام -->
+    <h3>الأدلة حسب الأقسام</h3>
+
+    <div class="departments">
+      <div class="department">
+        <h4>قسم الرياضيات</h4>
+        <p>خطط – سجلات – تقويم</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>قسم العلوم</h4>
+        <p>مختبرات – تقارير</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>قسم اللغة العربية</h4>
+        <p>الحلقة الثانية</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>الدراسات الاجتماعية</h4>
+        <p>أنشطة – خطط</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>التربية الإسلامية</h4>
+        <p>مناهج – تقويم</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>اللغة الإنجليزية</h4>
+        <p>خطط – مهارات</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>المهارات الحياتية</h4>
+        <p>أنشطة تطبيقية</p>
+        <button>عرض الأدلة</button>
+      </div>
+
+      <div class="department">
+        <h4>الابتكار وريادة الأعمال</h4>
+        <p>مشاريع – مسابقات</p>
+        <button>عرض الأدلة</button>
+      </div>
+    </div>
+
   </div>
-
 </div>
 
-<!-- الأقسام -->
-<div class="sections">
-<h3>الأدلة المرفوعة حسب الأقسام</h3>
-
-<div class="section-grid">
-
-<div class="section">
-<h4>قسم الرياضيات</h4>
-<p>خطط – سجلات – تقويم</p>
-<a href="department.html?dept=math">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>قسم العلوم</h4>
-<p>مختبرات – خطط – تقارير</p>
-<a href="department.html?dept=science">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>قسم اللغة العربية</h4>
-<p>الحلقة الثانية – خطط</p>
-<a href="department.html?dept=arabic">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>قسم الدراسات الاجتماعية</h4>
-<p>أنشطة – خطط</p>
-<a href="department.html?dept=social">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>قسم التربية الإسلامية</h4>
-<p>مناهج – تقويم</p>
-<a href="department.html?dept=islamic">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>الابتكار والموهبة</h4>
-<p>ابتكارات الطلبة</p>
-<a href="department.html?dept=innovation">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>الأنشطة المدرسية</h4>
-<p>برامج – فعاليات</p>
-<a href="department.html?dept=activities">عرض الأدلة</a>
-</div>
-
-<div class="section">
-<h4>التقويم الذاتي</h4>
-<p>خطط التحسين</p>
-<a href="department.html?dept=self">عرض الأدلة</a>
-</div>
-
-</div>
-</div>
-
-</div>
-
-<!-- JavaScript -->
 <script>
-new Chart(document.getElementById("statusChart"),{
-  type:"pie",
-  data:{
-    labels:["معتمدة","قيد المراجعة","مرفوضة"],
-    datasets:[{
-      data:[70,35,15],
-      backgroundColor:["#16a34a","#d97706","#dc2626"]
+/* رسم حالة الأدلة */
+new Chart(document.getElementById('statusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['معتمدة','قيد المراجعة','مرفوضة'],
+    datasets: [{
+      data: [70,35,15],
+      backgroundColor: ['#16a34a','#f59e0b','#dc2626']
     }]
-  },
-  options:{
-    plugins:{
-      legend:{
-        position:"bottom",
-        labels:{font:{size:11}}
-      }
-    }
   }
 });
 
-new Chart(document.getElementById("domainChart"),{
-  type:"bar",
-  data:{
-    labels:[
-      "الإنجاز الدراسي",
-      "النمو الشخصي",
-      "التدريس والتقويم",
-      "مناخ المدرسة",
-      "القيادة والحوكمة"
+/* رسم المجالات */
+new Chart(document.getElementById('domainChart'), {
+  type: 'bar',
+  data: {
+    labels: [
+      'الإنجاز الدراسي',
+      'النمو الشخصي',
+      'التدريس والتقويم',
+      'مناخ المدرسة',
+      'القيادة والحوكمة'
     ],
-    datasets:[{
-      label:"نسبة الإتقان %",
-      data:[80,75,70,85,78],
-      backgroundColor:"#1e3a8a",
-      borderRadius:6
+    datasets: [{
+      data: [78,72,68,82,75],
+      backgroundColor: '#1e3a8a'
     }]
   },
   options:{
     responsive:true,
-    maintainAspectRatio:false,
-    scales:{
-      y:{
-        beginAtZero:true,
-        max:100,
-        ticks:{stepSize:20}
-      },
-      x:{
-        ticks:{font:{size:11}}
-      }
-    },
-    plugins:{
-      legend:{display:false}
-    }
+    plugins:{legend:{display:false}}
   }
 });
 </script>
