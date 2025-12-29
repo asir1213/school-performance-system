@@ -2,32 +2,43 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>بصيرة | لوحة التحكم</title>
+<title>بصيرة | نظام تقويم أداء المدارس</title>
+
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.section{display:none}
+.section.active{display:block}
+</style>
 </head>
 
 <body>
 <div class="layout">
 
+<!-- Sidebar -->
 <aside class="sidebar">
   <div class="logo">بصيرة</div>
   <ul>
-    <li class="active"><a href="dashboard.html">لوحة التحكم</a></li>
-    <li><a href="upload.html">رفع دليل</a></li>
-    <li><a href="evidence.html">عرض الأدلة</a></li>
-    <li><a href="reports.html">التقارير</a></li>
+    <li class="active" onclick="showSection('dashboard')"><a>لوحة التحكم</a></li>
+    <li onclick="showSection('evidence')"><a>الأدلة</a></li>
+    <li onclick="showSection('upload')"><a>رفع دليل</a></li>
+    <li onclick="showSection('reports')"><a>التقارير</a></li>
   </ul>
 </aside>
 
+<!-- Content -->
 <main class="content">
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section active">
 <h1>لوحة التحكم</h1>
 
 <div class="stats">
   <div class="card total">120<span>إجمالي الأدلة</span></div>
-  <div class="card approved">70<span>المعتمدة</span></div>
+  <div class="card approved">70<span>معتمدة</span></div>
   <div class="card pending">35<span>قيد المراجعة</span></div>
-  <div class="card rejected">15<span>المرفوضة</span></div>
+  <div class="card rejected">15<span>مرفوضة</span></div>
 </div>
 
 <div class="charts">
@@ -35,50 +46,105 @@
     <h3>حالة الأدلة</h3>
     <canvas id="statusChart"></canvas>
   </div>
-
   <div class="chart-box">
-    <h3>الأدلة حسب المجالات</h3>
+    <h3>حسب المجالات</h3>
     <canvas id="domainChart"></canvas>
   </div>
 </div>
 
-<h2 class="section-title">الأدلة حسب الأقسام</h2>
-
+<h2>الأقسام</h2>
 <div class="departments">
-  <div class="dept"><h4>الرياضيات</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>العلوم</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>اللغة العربية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>اللغة الإنجليزية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>التربية الإسلامية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>الدراسات الاجتماعية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>المختبرات العلمية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>الابتكار وريادة الأعمال</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>الموسيقى</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>الفنون التشكيلية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>الأنشطة المدرسية</h4><button>عرض الأدلة</button></div>
-  <div class="dept"><h4>التوجيه المهني</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الرياضيات</h4><button onclick="openEvidence('الرياضيات')">عرض الأدلة</button></div>
+  <div class="dept"><h4>العلوم</h4><button onclick="openEvidence('العلوم')">عرض الأدلة</button></div>
+  <div class="dept"><h4>اللغة العربية</h4><button onclick="openEvidence('اللغة العربية')">عرض الأدلة</button></div>
+  <div class="dept"><h4>اللغة الإنجليزية</h4><button onclick="openEvidence('اللغة الإنجليزية')">عرض الأدلة</button></div>
+  <div class="dept"><h4>التربية الإسلامية</h4><button onclick="openEvidence('التربية الإسلامية')">عرض الأدلة</button></div>
+  <div class="dept"><h4>الدراسات الاجتماعية</h4><button onclick="openEvidence('الدراسات الاجتماعية')">عرض الأدلة</button></div>
+  <div class="dept"><h4>الابتكار</h4><button onclick="openEvidence('الابتكار')">عرض الأدلة</button></div>
+  <div class="dept"><h4>المختبرات</h4><button onclick="openEvidence('المختبرات')">عرض الأدلة</button></div>
 </div>
+</section>
+
+<!-- EVIDENCE -->
+<section id="evidence" class="section">
+<h1 id="evidenceTitle">عرض الأدلة</h1>
+
+<div class="card">
+  <h3>خطة قسم الرياضيات</h3>
+  <p>خطة الفصل الدراسي الأول</p>
+</div>
+
+<div class="card">
+  <h3>ابتكارات الطلاب</h3>
+  <p>مشاريع علمية وابتكارية</p>
+</div>
+</section>
+
+<!-- UPLOAD -->
+<section id="upload" class="section">
+<h1>رفع دليل</h1>
+
+<div class="card">
+  <label>عنوان الدليل</label>
+  <input type="text" style="width:100%;padding:10px"><br><br>
+
+  <label>القسم</label>
+  <select style="width:100%;padding:10px">
+    <option>الرياضيات</option>
+    <option>العلوم</option>
+    <option>اللغة العربية</option>
+    <option>الابتكار</option>
+  </select><br><br>
+
+  <label>رفع ملف</label>
+  <input type="file"><br><br>
+
+  <button class="btn-main">حفظ الدليل</button>
+</div>
+</section>
+
+<!-- REPORTS -->
+<section id="reports" class="section">
+<h1>التقارير</h1>
+<p>تقارير شاملة عن حالة الأدلة ونسب الاتقان</p>
+
+<div class="stats">
+  <div class="card approved">70<span>معتمدة</span></div>
+  <div class="card rejected">15<span>مرفوضة</span></div>
+</div>
+</section>
 
 </main>
 </div>
 
 <script>
-new Chart(statusChart, {
-  type: 'doughnut',
-  data: {
-    labels: ['معتمدة','قيد المراجعة','مرفوضة'],
-    datasets:[{data:[70,35,15],backgroundColor:['#2e7d32','#f9a825','#c62828']}]
-  }
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.sidebar li').forEach(li=>li.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+function openEvidence(name){
+  showSection('evidence');
+  document.getElementById('evidenceTitle').innerText = "أدلة قسم " + name;
+}
+
+/* Charts */
+new Chart(statusChart,{
+ type:'doughnut',
+ data:{labels:['معتمدة','قيد المراجعة','مرفوضة'],
+ datasets:[{data:[70,35,15],backgroundColor:['#2e7d32','#f9a825','#c62828']}]}
 });
 
 new Chart(domainChart,{
-  type:'bar',
-  data:{
-    labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
-    datasets:[{data:[80,70,65,85,75],backgroundColor:'#1e3a8a'}]
-  },
-  options:{plugins:{legend:{display:false}}}
+ type:'bar',
+ data:{labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
+ datasets:[{data:[80,70,65,85,75],backgroundColor:'#1e3a8a'}]},
+ options:{plugins:{legend:{display:false}}}
 });
 </script>
+
 </body>
 </html>
