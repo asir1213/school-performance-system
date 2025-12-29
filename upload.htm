@@ -1,81 +1,43 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>بصيرة – رفع دليل</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>رفع دليل</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="topbar">
-  بصيرة – رفع دليل جديد
-</div>
+<div class="topbar">بصيرة – رفع دليل</div>
 
 <div class="layout">
 
-  <!-- القائمة الجانبية -->
-  <div class="sidebar">
-    <a href="dashboard.html">لوحة التحكم</a>
-    <a href="upload.html" class="active">رفع دليل</a>
-    <a href="evidence.html">عرض الأدلة</a>
-    <a href="report.html">التقارير</a>
-  </div>
+<div class="sidebar">
+  <a href="dashboard.html">لوحة التحكم</a>
+  <a href="upload.html" class="active">رفع دليل</a>
+  <a href="evidence.html">عرض الأدلة</a>
+  <a href="report.html">التقارير</a>
+</div>
 
-  <!-- المحتوى -->
-  <div class="content">
+<div class="content">
 
-    <div class="card" style="max-width:700px;margin:auto">
-      <h2 style="text-align:center">نموذج رفع الدليل</h2>
+<div class="card" style="max-width:650px;margin:auto">
+<h2>إضافة دليل جديد</h2>
 
-      <label>عنوان الدليل</label>
-      <input type="text" style="width:100%;padding:10px;margin:8px 0">
+<input placeholder="عنوان الدليل">
+<textarea placeholder="وصف الدليل"></textarea>
 
-      <label>وصف الدليل</label>
-      <textarea style="width:100%;padding:10px;margin:8px 0"></textarea>
+<select><option>اختر المجال</option></select>
+<select><option>اختر المعيار</option></select>
+<select><option>اختر المؤشر</option></select>
 
-      <label>المجال</label>
-      <select style="width:100%;padding:10px;margin:8px 0">
-        <option>اختر المجال</option>
-        <option>الإنجاز الدراسي</option>
-        <option>النمو الشخصي</option>
-        <option>التدريس والتقويم</option>
-        <option>مناخ المدرسة</option>
-        <option>القيادة والحوكمة</option>
-      </select>
+<input type="file" multiple>
 
-      <label>المعيار</label>
-      <select style="width:100%;padding:10px;margin:8px 0">
-        <option>اختر المعيار</option>
-      </select>
+<button style="margin-top:15px">حفظ الدليل</button>
 
-      <label>المؤشر</label>
-      <select style="width:100%;padding:10px;margin:8px 0">
-        <option>اختر المؤشر</option>
-      </select>
+</div>
 
-      <label>طريقة إضافة الدليل</label>
-      <input type="file" multiple style="margin:10px 0">
-
-      <p style="color:#64748b;font-size:14px">
-        الملفات المسموحة: PDF – Word – صور – فيديو
-      </p>
-
-      <button style="
-        width:100%;
-        padding:12px;
-        background:#1e3a8a;
-        color:#fff;
-        border:none;
-        border-radius:10px;
-        font-size:16px;
-        cursor:pointer
-      ">
-        حفظ الدليل
-      </button>
-    </div>
-
-  </div>
+</div>
 </div>
 
 </body>
