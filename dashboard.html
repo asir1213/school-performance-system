@@ -2,148 +2,258 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>بصيرة | نظام تقويم أداء المدارس</title>
+<title>بَصيرة – نظام تقويم أداء المدارس</title>
 
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- خط عربي رسمي -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- أيقونات -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
-.section{display:none}
-.section.active{display:block}
+*{
+  box-sizing:border-box;
+  font-family:'Cairo', sans-serif;
+}
+body{
+  margin:0;
+  background:#f4f7fb;
+}
+
+/* ===== Top Bar ===== */
+.topbar{
+  height:70px;
+  background:#0d47a1;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:700;
+}
+
+/* ===== Layout ===== */
+.layout{
+  display:flex;
+}
+
+/* ===== Sidebar ===== */
+.sidebar{
+  width:240px;
+  background:#0b3c91;
+  color:#fff;
+  min-height:calc(100vh - 70px);
+  padding-top:20px;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 20px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:#1565c0;
+  border-right:5px solid #ffeb3b;
+}
+
+/* ===== Content ===== */
+.content{
+  flex:1;
+  padding:25px;
+}
+
+/* ===== Sections ===== */
+.section{
+  display:none;
+}
+.section.active{
+  display:block;
+}
+
+/* ===== Cards ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-bottom:30px;
+}
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.card span{
+  display:block;
+  margin-top:8px;
+  font-size:14px;
+  color:#555;
+}
+.green{color:#2e7d32;}
+.gold{color:#f9a825;}
+.red{color:#c62828;}
+
+/* ===== Departments ===== */
+.depts{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+.dept{
+  background:#fff;
+  padding:15px;
+  border-radius:8px;
+  box-shadow:0 2px 4px rgba(0,0,0,.1);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.dept button{
+  background:#0d47a1;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ===== AI Assistant ===== */
+.ai-box{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-bottom:30px;
+}
+.ai-card{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.chat{
+  background:#fff;
+  border-radius:10px;
+  padding:15px;
+}
+.chat textarea{
+  width:100%;
+  height:90px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  padding:10px;
+}
+.chat button{
+  margin-top:10px;
+  background:#0d47a1;
+  color:#fff;
+  border:none;
+  padding:10px 20px;
+  border-radius:6px;
+}
 </style>
 </head>
 
 <body>
+
+<div class="topbar">
+  بَصيرة – نظام تقويم أداء المدارس
+</div>
+
 <div class="layout">
 
-<!-- Sidebar -->
-<aside class="sidebar">
-  <div class="logo">بصيرة</div>
-  <ul>
-    <li class="active" onclick="showSection('dashboard')"><a>لوحة التحكم</a></li>
-    <li onclick="showSection('evidence')"><a>الأدلة</a></li>
-    <li onclick="showSection('upload')"><a>رفع دليل</a></li>
-    <li onclick="showSection('reports')"><a>التقارير</a></li>
-  </ul>
-</aside>
-
-<!-- Content -->
-<main class="content">
-
-<!-- DASHBOARD -->
-<section id="dashboard" class="section active">
-<h1>لوحة التحكم</h1>
-
-<div class="stats">
-  <div class="card total">120<span>إجمالي الأدلة</span></div>
-  <div class="card approved">70<span>معتمدة</span></div>
-  <div class="card pending">35<span>قيد المراجعة</span></div>
-  <div class="card rejected">15<span>مرفوضة</span></div>
-</div>
-
-<div class="charts">
-  <div class="chart-box">
-    <h3>حالة الأدلة</h3>
-    <canvas id="statusChart"></canvas>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a class="active" onclick="showSection('dashboard',this)"><i class="fa fa-chart-line"></i> لوحة التحكم</a>
+    <a onclick="showSection('evidence',this)"><i class="fa fa-folder-open"></i> الأدلة</a>
+    <a onclick="showSection('upload',this)"><i class="fa fa-upload"></i> رفع دليل</a>
+    <a onclick="showSection('reports',this)"><i class="fa fa-file-alt"></i> التقارير</a>
+    <a onclick="showSection('assistant',this)"><i class="fa fa-robot"></i> المساعد الذكي</a>
   </div>
-  <div class="chart-box">
-    <h3>حسب المجالات</h3>
-    <canvas id="domainChart"></canvas>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="section active">
+      <h2>لوحة التحكم</h2>
+
+      <div class="cards">
+        <div class="card">120<span>إجمالي الأدلة</span></div>
+        <div class="card green">70<span>المعتمدة</span></div>
+        <div class="card gold">35<span>قيد المراجعة</span></div>
+        <div class="card red">15<span>المرفوضة</span></div>
+      </div>
+
+      <h3>الأقسام</h3>
+      <div class="depts">
+        <div class="dept">الرياضيات<button>عرض الأدلة</button></div>
+        <div class="dept">العلوم<button>عرض الأدلة</button></div>
+        <div class="dept">اللغة العربية<button>عرض الأدلة</button></div>
+        <div class="dept">اللغة الإنجليزية<button>عرض الأدلة</button></div>
+        <div class="dept">التربية الإسلامية<button>عرض الأدلة</button></div>
+        <div class="dept">الدراسات الاجتماعية<button>عرض الأدلة</button></div>
+        <div class="dept">المختبرات<button>عرض الأدلة</button></div>
+        <div class="dept">الابتكار وريادة الأعمال<button>عرض الأدلة</button></div>
+        <div class="dept">الموسيقى<button>عرض الأدلة</button></div>
+        <div class="dept">الفنون<button>عرض الأدلة</button></div>
+        <div class="dept">الأنشطة المدرسية<button>عرض الأدلة</button></div>
+        <div class="dept">التوجيه المهني<button>عرض الأدلة</button></div>
+      </div>
+    </div>
+
+    <!-- Evidence -->
+    <div id="evidence" class="section">
+      <h2>الأدلة</h2>
+      <p>هنا سيتم عرض الأدلة مع الفلاتر.</p>
+    </div>
+
+    <!-- Upload -->
+    <div id="upload" class="section">
+      <h2>رفع دليل</h2>
+      <p>اسحب الملف أو اختره من جهازك (جميع أنواع الملفات مدعومة).</p>
+    </div>
+
+    <!-- Reports -->
+    <div id="reports" class="section">
+      <h2>التقارير</h2>
+      <p>تحليلات وتقارير الأداء المدرسي.</p>
+    </div>
+
+    <!-- Assistant -->
+    <div id="assistant" class="section">
+      <h2>المساعد الذكي</h2>
+
+      <div class="ai-box">
+        <div class="ai-card">✍️ كتابة عبارة تقييمية</div>
+        <div class="ai-card">📊 تحليل الأدلة</div>
+        <div class="ai-card">🎯 اقتراح تطوير</div>
+      </div>
+
+      <div class="chat">
+        <textarea placeholder="اكتب سؤالك هنا..."></textarea>
+        <button>إرسال</button>
+      </div>
+    </div>
+
   </div>
-</div>
-
-<h2>الأقسام</h2>
-<div class="departments">
-  <div class="dept"><h4>الرياضيات</h4><button onclick="openEvidence('الرياضيات')">عرض الأدلة</button></div>
-  <div class="dept"><h4>العلوم</h4><button onclick="openEvidence('العلوم')">عرض الأدلة</button></div>
-  <div class="dept"><h4>اللغة العربية</h4><button onclick="openEvidence('اللغة العربية')">عرض الأدلة</button></div>
-  <div class="dept"><h4>اللغة الإنجليزية</h4><button onclick="openEvidence('اللغة الإنجليزية')">عرض الأدلة</button></div>
-  <div class="dept"><h4>التربية الإسلامية</h4><button onclick="openEvidence('التربية الإسلامية')">عرض الأدلة</button></div>
-  <div class="dept"><h4>الدراسات الاجتماعية</h4><button onclick="openEvidence('الدراسات الاجتماعية')">عرض الأدلة</button></div>
-  <div class="dept"><h4>الابتكار</h4><button onclick="openEvidence('الابتكار')">عرض الأدلة</button></div>
-  <div class="dept"><h4>المختبرات</h4><button onclick="openEvidence('المختبرات')">عرض الأدلة</button></div>
-</div>
-</section>
-
-<!-- EVIDENCE -->
-<section id="evidence" class="section">
-<h1 id="evidenceTitle">عرض الأدلة</h1>
-
-<div class="card">
-  <h3>خطة قسم الرياضيات</h3>
-  <p>خطة الفصل الدراسي الأول</p>
-</div>
-
-<div class="card">
-  <h3>ابتكارات الطلاب</h3>
-  <p>مشاريع علمية وابتكارية</p>
-</div>
-</section>
-
-<!-- UPLOAD -->
-<section id="upload" class="section">
-<h1>رفع دليل</h1>
-
-<div class="card">
-  <label>عنوان الدليل</label>
-  <input type="text" style="width:100%;padding:10px"><br><br>
-
-  <label>القسم</label>
-  <select style="width:100%;padding:10px">
-    <option>الرياضيات</option>
-    <option>العلوم</option>
-    <option>اللغة العربية</option>
-    <option>الابتكار</option>
-  </select><br><br>
-
-  <label>رفع ملف</label>
-  <input type="file"><br><br>
-
-  <button class="btn-main">حفظ الدليل</button>
-</div>
-</section>
-
-<!-- REPORTS -->
-<section id="reports" class="section">
-<h1>التقارير</h1>
-<p>تقارير شاملة عن حالة الأدلة ونسب الاتقان</p>
-
-<div class="stats">
-  <div class="card approved">70<span>معتمدة</span></div>
-  <div class="card rejected">15<span>مرفوضة</span></div>
-</div>
-</section>
-
-</main>
 </div>
 
 <script>
-function showSection(id){
+function showSection(id,el){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 
-  document.querySelectorAll('.sidebar li').forEach(li=>li.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
 }
-
-function openEvidence(name){
-  showSection('evidence');
-  document.getElementById('evidenceTitle').innerText = "أدلة قسم " + name;
-}
-
-/* Charts */
-new Chart(statusChart,{
- type:'doughnut',
- data:{labels:['معتمدة','قيد المراجعة','مرفوضة'],
- datasets:[{data:[70,35,15],backgroundColor:['#2e7d32','#f9a825','#c62828']}]}
-});
-
-new Chart(domainChart,{
- type:'bar',
- data:{labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
- datasets:[{data:[80,70,65,85,75],backgroundColor:'#1e3a8a'}]},
- options:{plugins:{legend:{display:false}}}
-});
 </script>
 
 </body>
