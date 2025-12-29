@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>بَصْرَة | رفع دليل</title>
+<title>بصرة | رفع دليل</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -15,152 +15,204 @@ header{
   background:#1e3a8a;
   color:#fff;
   padding:18px 30px;
-  font-size:22px;
+  font-size:20px;
   font-weight:bold;
 }
+
 .container{
   padding:25px;
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
 }
+
 .card{
   background:#fff;
   padding:25px;
   border-radius:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  box-shadow:0 6px 14px rgba(0,0,0,.1);
 }
-.field{
+
+h2{
+  margin-top:0;
+  color:#1e3a8a;
+}
+
+.form-group{
   margin-bottom:18px;
 }
-.field label{
+
+label{
   display:block;
-  margin-bottom:6px;
   font-weight:bold;
+  margin-bottom:6px;
 }
-.field input,
-.field textarea,
-.field select{
+
+input, select, textarea{
   width:100%;
   padding:10px;
   border-radius:6px;
   border:1px solid #ccc;
+  font-size:14px;
 }
-textarea{resize:vertical}
 
+textarea{
+  resize:vertical;
+  min-height:90px;
+}
+
+/* رفع الملفات */
 .upload-box{
-  border:2px dashed #1e3a8a;
+  border:2px dashed #94a3b8;
+  border-radius:10px;
   padding:25px;
   text-align:center;
-  border-radius:10px;
-  color:#555;
-  margin-bottom:15px;
+  color:#64748b;
+  cursor:pointer;
+  transition:.3s;
+}
+.upload-box:hover{
+  background:#f1f5f9;
 }
 
+.upload-note{
+  font-size:13px;
+  margin-top:8px;
+  color:#475569;
+}
+
+/* الأزرار */
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:25px;
+}
 button{
-  background:#1e3a8a;
-  color:#fff;
+  padding:12px 18px;
   border:none;
-  padding:12px 25px;
   border-radius:8px;
   font-size:15px;
   cursor:pointer;
 }
-button:hover{background:#162d6a}
+.save{
+  background:#16a34a;
+  color:#fff;
+}
+.cancel{
+  background:#dc2626;
+  color:#fff;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-بَصْرَة – رفع دليل
+بصرة – رفع دليل
 </header>
 
 <div class="container">
-<div class="card">
 
-<div class="field">
+<div class="card">
+<h2>نموذج رفع دليل</h2>
+
+<!-- عنوان -->
+<div class="form-group">
 <label>عنوان الدليل</label>
 <input type="text" placeholder="مثال: خطة قسم الرياضيات">
 </div>
 
-<div class="field">
+<!-- الوصف -->
+<div class="form-group">
 <label>وصف الدليل</label>
-<textarea rows="3" placeholder="اكتب وصفًا مختصرًا للدليل"></textarea>
+<textarea placeholder="اكتب وصفًا مختصرًا للدليل"></textarea>
 </div>
 
-<div class="field">
-<label>المجال</label>
-<select id="domain">
-<option value="">اختر المجال</option>
-<option value="achievement">الإنجاز الدراسي</option>
-<option value="growth">النمو الشخصي</option>
-<option value="teaching">التدريس والتقويم</option>
-<option value="environment">مناخ المدرسة وبيئة التعلم</option>
-<option value="leadership">القيادة والإدارة والحوكمة</option>
+<!-- المحور -->
+<div class="form-group">
+<label>المحور</label>
+<select id="axis">
+<option value="">اختر المحور</option>
+<option>ضمان جودة نواتج التعلم وعمليات المدرسة</option>
+<option>جودة نواتج التعلم</option>
+<option>جودة عمليات المدرسة</option>
 </select>
 </div>
 
-<div class="field">
+<!-- المجال -->
+<div class="form-group">
+<label>المجال</label>
+<select id="domain" disabled>
+<option value="">اختر المجال</option>
+<option>الإنجاز الدراسي</option>
+<option>النمو الشخصي</option>
+<option>التدريس والتقويم</option>
+<option>مناخ المدرسة وبيئة التعلم</option>
+<option>القيادة والإدارة والحوكمة</option>
+</select>
+</div>
+
+<!-- المعيار -->
+<div class="form-group">
 <label>المعيار</label>
 <select id="standard" disabled>
 <option value="">اختر المعيار</option>
+<option>التحصيل الدراسي</option>
+<option>التقدم الدراسي</option>
+<option>مهارات التعلم</option>
 </select>
 </div>
 
-<div class="field">
+<!-- المؤشر -->
+<div class="form-group">
 <label>المؤشر</label>
 <select id="indicator" disabled>
 <option value="">اختر المؤشر</option>
+<option>وجود خطط واضحة</option>
+<option>تحليل نتائج الطلبة</option>
+<option>توظيف استراتيجيات تعلم نشط</option>
 </select>
 </div>
 
+<!-- طريقة الإضافة -->
+<div class="form-group">
+<label>طريقة إضافة الدليل</label>
+<select>
+<option>رفع ملف</option>
+<option>إدخال رابط</option>
+</select>
+</div>
+
+<!-- رفع -->
+<div class="form-group">
 <div class="upload-box">
-اسحب الملف هنا أو اضغط للاختيار  
-<br>
-<small>PDF – Word – صور – فيديو</small>
+📎 اسحب الملف هنا أو اضغط للاختيار
+<div class="upload-note">
+الملفات المسموحة: PDF – Word – Excel – صور – فيديو
+</div>
+</div>
 </div>
 
-<button>حفظ الدليل</button>
+<!-- أزرار -->
+<div class="actions">
+<button class="save">💾 حفظ الدليل</button>
+<button class="cancel">إلغاء</button>
+</div>
 
 </div>
+
 </div>
 
 <script>
-const standards={
-achievement:["التحصيل الدراسي","التقدم الدراسي","مهارات التعلم"],
-growth:["الابتكار وريادة الأعمال","الوعي الصحي والبيئي","القيم والسلوك"],
-teaching:["تخطيط المناهج","إدارة الصف","فاعلية التدريس","تعزيز مهارات التعلم","التقويم ومساندة التعلم"],
-environment:["جودة بيئة التعلم","تعزيز المواهب","الدعم والرعاية","تنمية مهارات البحث"],
-leadership:["الحوكمة","الشراكة المجتمعية","الكفاءة الإدارية","قيادة التعليم","قيادة التغيير"]
-};
-
-const indicators={
-"التحصيل الدراسي":["نتائج الاختبارات","تحليل النتائج"],
-"التقدم الدراسي":["تحسن مستوى الطلبة"],
-"مهارات التعلم":["التفكير الناقد"],
-"الابتكار وريادة الأعمال":["مشاريع طلابية"],
-"الوعي الصحي والبيئي":["مبادرات مدرسية"]
-};
-
-domain.onchange=()=>{
-standard.innerHTML='<option>اختر المعيار</option>';
-indicator.innerHTML='<option>اختر المؤشر</option>';
-indicator.disabled=true;
-if(!domain.value)return;
-standards[domain.value].forEach(s=>{
-standard.innerHTML+=`<option>${s}</option>`;
-});
-standard.disabled=false;
-};
-
-standard.onchange=()=>{
-indicator.innerHTML='<option>اختر المؤشر</option>';
-if(!indicators[standard.value])return;
-indicators[standard.value].forEach(i=>{
-indicator.innerHTML+=`<option>${i}</option>`;
-});
-indicator.disabled=false;
-};
+// تفعيل التدرج الذكي
+document.getElementById("axis").onchange=function(){
+  document.getElementById("domain").disabled = !this.value;
+}
+document.getElementById("domain").onchange=function(){
+  document.getElementById("standard").disabled = !this.value;
+}
+document.getElementById("standard").onchange=function(){
+  document.getElementById("indicator").disabled = !this.value;
+}
 </script>
 
 </body>
