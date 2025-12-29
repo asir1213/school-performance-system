@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>بصيرة – لوحة التحكم</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<title>بصيرة – لوحة التحكم</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* تحسين الرسوم */
+.chart-box {
+  background: transparent;
+  box-shadow: none;
+}
+canvas {
+  max-width: 300px !important;
+  margin: auto;
+}
+.legend {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:10px;
+}
+.legend span {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+}
+.legend i {
+  width:14px;
+  height:14px;
+  display:inline-block;
+}
+</style>
 </head>
 
 <body>
@@ -15,139 +45,88 @@
 
 <div class="layout">
 
-  <!-- القائمة الجانبية -->
-  <div class="sidebar">
-    <a href="dashboard.html" class="active">لوحة التحكم</a>
-    <a href="upload.html">رفع دليل</a>
-    <a href="evidence.html">عرض الأدلة</a>
-    <a href="report.html">التقارير</a>
+<!-- القائمة الجانبية -->
+<div class="sidebar">
+  <a href="dashboard.html" class="active">لوحة التحكم</a>
+  <a href="upload.html">رفع دليل</a>
+  <a href="evidence.html">عرض الأدلة</a>
+  <a href="report.html">التقارير</a>
+</div>
+
+<div class="content">
+
+<!-- البطاقات -->
+<div class="cards">
+  <div class="card"><h3>إجمالي الأدلة</h3><span>120</span></div>
+  <div class="card"><h3>قيد المراجعة</h3><span style="color:#f59e0b">35</span></div>
+  <div class="card"><h3>المعتمدة</h3><span style="color:#16a34a">70</span></div>
+  <div class="card"><h3>المرفوضة</h3><span style="color:#dc2626">15</span></div>
+</div>
+
+<!-- الرسوم -->
+<div class="charts">
+
+<div class="chart-box">
+<h3 style="text-align:center">حالة الأدلة</h3>
+<canvas id="statusChart"></canvas>
+
+<div class="legend">
+  <span><i style="background:#16a34a"></i> معتمدة</span>
+  <span><i style="background:#f59e0b"></i> قيد المراجعة</span>
+  <span><i style="background:#dc2626"></i> مرفوضة</span>
+</div>
+</div>
+
+<div class="chart-box">
+<h3 style="text-align:center">الأدلة حسب المجالات</h3>
+<canvas id="domainChart"></canvas>
+</div>
+
+</div>
+
+<!-- الأقسام -->
+<h3>الأدلة حسب الأقسام</h3>
+
+<div class="departments">
+  <div class="department">
+    <h4>قسم الرياضيات</h4>
+    <button onclick="location.href='evidence.html'">عرض الأدلة</button>
   </div>
-
-  <!-- المحتوى -->
-  <div class="content">
-
-    <!-- البطاقات -->
-    <div class="cards">
-      <div class="card">
-        <h3>إجمالي الأدلة</h3>
-        <span>120</span>
-      </div>
-      <div class="card">
-        <h3>قيد المراجعة</h3>
-        <span style="color:#f59e0b">35</span>
-      </div>
-      <div class="card">
-        <h3>المعتمدة</h3>
-        <span style="color:#16a34a">70</span>
-      </div>
-      <div class="card">
-        <h3>المرفوضة</h3>
-        <span style="color:#dc2626">15</span>
-      </div>
-    </div>
-
-    <!-- الرسوم -->
-    <div class="charts">
-      <div class="chart-box">
-        <h3 style="text-align:center">حالة الأدلة</h3>
-        <canvas id="statusChart"></canvas>
-      </div>
-
-      <div class="chart-box">
-        <h3 style="text-align:center">الأدلة حسب المجالات</h3>
-        <canvas id="domainChart"></canvas>
-      </div>
-    </div>
-
-    <!-- الأقسام -->
-    <h3>الأدلة حسب الأقسام</h3>
-
-    <div class="departments">
-      <div class="department">
-        <h4>قسم الرياضيات</h4>
-        <p>خطط – سجلات – تقويم</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>قسم العلوم</h4>
-        <p>مختبرات – تقارير</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>قسم اللغة العربية</h4>
-        <p>الحلقة الثانية</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>الدراسات الاجتماعية</h4>
-        <p>أنشطة – خطط</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>التربية الإسلامية</h4>
-        <p>مناهج – تقويم</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>اللغة الإنجليزية</h4>
-        <p>خطط – مهارات</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>المهارات الحياتية</h4>
-        <p>أنشطة تطبيقية</p>
-        <button>عرض الأدلة</button>
-      </div>
-
-      <div class="department">
-        <h4>الابتكار وريادة الأعمال</h4>
-        <p>مشاريع – مسابقات</p>
-        <button>عرض الأدلة</button>
-      </div>
-    </div>
-
+  <div class="department">
+    <h4>قسم العلوم</h4>
+    <button onclick="location.href='evidence.html'">عرض الأدلة</button>
+  </div>
+  <div class="department">
+    <h4>قسم اللغة العربية</h4>
+    <button onclick="location.href='evidence.html'">عرض الأدلة</button>
+  </div>
+  <div class="department">
+    <h4>التربية الإسلامية</h4>
+    <button onclick="location.href='evidence.html'">عرض الأدلة</button>
   </div>
 </div>
 
+</div>
+</div>
+
 <script>
-/* رسم حالة الأدلة */
-new Chart(document.getElementById('statusChart'), {
-  type: 'doughnut',
-  data: {
-    labels: ['معتمدة','قيد المراجعة','مرفوضة'],
-    datasets: [{
-      data: [70,35,15],
-      backgroundColor: ['#16a34a','#f59e0b','#dc2626']
-    }]
-  }
+new Chart(statusChart,{
+ type:'doughnut',
+ data:{
+  labels:['معتمدة','قيد المراجعة','مرفوضة'],
+  datasets:[{data:[70,35,15],
+   backgroundColor:['#16a34a','#f59e0b','#dc2626']}]
+ },
+ options:{plugins:{legend:{display:false}}}
 });
 
-/* رسم المجالات */
-new Chart(document.getElementById('domainChart'), {
-  type: 'bar',
-  data: {
-    labels: [
-      'الإنجاز الدراسي',
-      'النمو الشخصي',
-      'التدريس والتقويم',
-      'مناخ المدرسة',
-      'القيادة والحوكمة'
-    ],
-    datasets: [{
-      data: [78,72,68,82,75],
-      backgroundColor: '#1e3a8a'
-    }]
-  },
-  options:{
-    responsive:true,
-    plugins:{legend:{display:false}}
-  }
+new Chart(domainChart,{
+ type:'bar',
+ data:{
+  labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
+  datasets:[{data:[78,72,68,82,75],backgroundColor:'#1e3a8a'}]
+ },
+ options:{plugins:{legend:{display:false}}}
 });
 </script>
 
