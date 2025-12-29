@@ -1,97 +1,84 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>بصيرة | لوحة التحكم</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<title>بصيرة | لوحة التحكم</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
 
+<body>
 <div class="layout">
 
-  <!-- الشريط الجانبي -->
-  <aside class="sidebar">
-    <h2 class="logo">بصيرة</h2>
-    <ul>
-      <li class="active"><a href="dashboard.html">لوحة التحكم</a></li>
-      <li><a href="upload.html">رفع دليل</a></li>
-      <li><a href="evidence.html">عرض الأدلة</a></li>
-      <li><a href="reports.html">التقارير</a></li>
-    </ul>
-  </aside>
+<aside class="sidebar">
+  <div class="logo">بصيرة</div>
+  <ul>
+    <li class="active"><a href="dashboard.html">لوحة التحكم</a></li>
+    <li><a href="upload.html">رفع دليل</a></li>
+    <li><a href="evidence.html">عرض الأدلة</a></li>
+    <li><a href="reports.html">التقارير</a></li>
+  </ul>
+</aside>
 
-  <!-- المحتوى -->
-  <main class="content">
+<main class="content">
+<h1>لوحة التحكم</h1>
 
-    <h1>لوحة التحكم</h1>
+<div class="stats">
+  <div class="card total">120<span>إجمالي الأدلة</span></div>
+  <div class="card approved">70<span>المعتمدة</span></div>
+  <div class="card pending">35<span>قيد المراجعة</span></div>
+  <div class="card rejected">15<span>المرفوضة</span></div>
+</div>
 
-    <!-- الإحصائيات -->
-    <div class="stats">
-      <div class="card total">120<br><span>إجمالي الأدلة</span></div>
-      <div class="card approved">70<br><span>المعتمدة</span></div>
-      <div class="card pending">35<br><span>قيد المراجعة</span></div>
-      <div class="card rejected">15<br><span>المرفوضة</span></div>
-    </div>
+<div class="charts">
+  <div class="chart-box">
+    <h3>حالة الأدلة</h3>
+    <canvas id="statusChart"></canvas>
+  </div>
 
-    <!-- الرسوم -->
-    <div class="charts">
-      <div class="chart-box">
-        <h3>حالة الأدلة</h3>
-        <canvas id="statusChart"></canvas>
-      </div>
+  <div class="chart-box">
+    <h3>الأدلة حسب المجالات</h3>
+    <canvas id="domainChart"></canvas>
+  </div>
+</div>
 
-      <div class="chart-box">
-        <h3>الأدلة حسب المجالات</h3>
-        <canvas id="domainChart"></canvas>
-      </div>
-    </div>
+<h2 class="section-title">الأدلة حسب الأقسام</h2>
 
-    <!-- الأقسام -->
-    <h2 class="section-title">الأدلة حسب الأقسام</h2>
+<div class="departments">
+  <div class="dept"><h4>الرياضيات</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>العلوم</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>اللغة العربية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>اللغة الإنجليزية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>التربية الإسلامية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الدراسات الاجتماعية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>المختبرات العلمية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الابتكار وريادة الأعمال</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الموسيقى</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الفنون التشكيلية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>الأنشطة المدرسية</h4><button>عرض الأدلة</button></div>
+  <div class="dept"><h4>التوجيه المهني</h4><button>عرض الأدلة</button></div>
+</div>
 
-    <div class="departments">
-      <div class="dept">الرياضيات</div>
-      <div class="dept">العلوم</div>
-      <div class="dept">اللغة العربية</div>
-      <div class="dept">اللغة الإنجليزية</div>
-      <div class="dept">التربية الإسلامية</div>
-      <div class="dept">الدراسات الاجتماعية</div>
-      <div class="dept">التوجيه المهني</div>
-      <div class="dept">الأنشطة المدرسية</div>
-    </div>
-
-  </main>
+</main>
 </div>
 
 <script>
-new Chart(document.getElementById('statusChart'), {
+new Chart(statusChart, {
   type: 'doughnut',
   data: {
-    labels: ['معتمدة', 'قيد المراجعة', 'مرفوضة'],
-    datasets: [{
-      data: [70, 35, 15],
-      backgroundColor: ['#2e7d32', '#f9a825', '#c62828']
-    }]
-  },
-  options: { plugins: { legend: { position: 'bottom' } } }
-});
-
-new Chart(document.getElementById('domainChart'), {
-  type: 'bar',
-  data: {
-    labels: ['الإنجاز', 'النمو', 'التدريس', 'المناخ', 'القيادة'],
-    datasets: [{
-      data: [80, 70, 65, 85, 75],
-      backgroundColor: '#1e3a8a'
-    }]
-  },
-  options: {
-    scales: { y: { beginAtZero: true } },
-    plugins: { legend: { display: false } }
+    labels: ['معتمدة','قيد المراجعة','مرفوضة'],
+    datasets:[{data:[70,35,15],backgroundColor:['#2e7d32','#f9a825','#c62828']}]
   }
 });
-</script>
 
+new Chart(domainChart,{
+  type:'bar',
+  data:{
+    labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
+    datasets:[{data:[80,70,65,85,75],backgroundColor:'#1e3a8a'}]
+  },
+  options:{plugins:{legend:{display:false}}}
+});
+</script>
 </body>
 </html>
