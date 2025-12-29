@@ -1,115 +1,118 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>بَصْرَة | لوحة التحكم</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>بَصْرَة | لوحة التحكم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Tahoma", Arial;
-      background: #f4f6f9;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Tahoma,Arial;
+  background:#f4f6f9;
+}
+header{
+  background:#1e3a8a;
+  color:#fff;
+  padding:18px 30px;
+  font-size:22px;
+  font-weight:bold;
+}
+.sidebar{
+  position:fixed;
+  right:0;
+  top:70px;
+  width:220px;
+  height:100%;
+  background:#fff;
+  border-left:1px solid #ddd;
+}
+.sidebar a{
+  display:block;
+  padding:15px 20px;
+  color:#1e3a8a;
+  text-decoration:none;
+  font-weight:bold;
+}
+.sidebar a:hover{
+  background:#eef2ff;
+}
+.main{
+  margin-right:240px;
+  padding:25px;
+}
 
-    header {
-      background: #1e3a8a;
-      color: white;
-      padding: 16px 30px;
-      font-size: 22px;
-      font-weight: bold;
-    }
+/* إحصائيات */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+.stat{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.stat h4{margin:0;color:#555;font-size:15px}
+.stat span{font-size:32px;font-weight:bold;margin-top:8px;display:block}
 
-    .container {
-      padding: 25px;
-    }
+/* رسوم */
+.charts{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+.box{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
 
-    /* بطاقات الإحصائيات */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .stat-card h3 {
-      margin: 0;
-      color: #555;
-      font-size: 15px;
-    }
-
-    .stat-card span {
-      display: block;
-      margin-top: 10px;
-      font-size: 32px;
-      font-weight: bold;
-      color: #1e3a8a;
-    }
-
-    /* الرسوم */
-    .charts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-    }
-
-    .chart-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .chart-box h4 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    /* قائمة جانبية */
-    .sidebar {
-      position: fixed;
-      top: 70px;
-      right: 0;
-      width: 220px;
-      height: 100%;
-      background: #ffffff;
-      border-left: 1px solid #ddd;
-      padding-top: 20px;
-    }
-
-    .sidebar a {
-      display: block;
-      padding: 15px 20px;
-      color: #1e3a8a;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .sidebar a:hover {
-      background: #f1f5ff;
-    }
-
-    .main {
-      margin-right: 240px;
-    }
-  </style>
+/* الأقسام */
+.sections{
+  margin-top:40px;
+}
+.sections h3{
+  margin-bottom:20px;
+}
+.section-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.section{
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.section h4{
+  margin:0 0 10px 0;
+}
+.section a{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 15px;
+  background:#1e3a8a;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+}
+.section a:hover{background:#162d6a}
+</style>
 </head>
 
 <body>
 
 <header>
-  بَصْرَة – نظام تقويم أداء المدارس | لوحة التحكم
+بَصْرَة – نظام تقويم أداء المدارس | لوحة التحكم
 </header>
 
 <div class="sidebar">
@@ -119,84 +122,110 @@
   <a href="reports.html">التقارير</a>
 </div>
 
-<div class="main container">
+<div class="main">
 
-  <!-- الإحصائيات -->
-  <div class="stats">
-    <div class="stat-card">
-      <h3>إجمالي الأدلة</h3>
-      <span>120</span>
-    </div>
-    <div class="stat-card">
-      <h3>قيد المراجعة</h3>
-      <span style="color:#d97706">35</span>
-    </div>
-    <div class="stat-card">
-      <h3>المعتمدة</h3>
-      <span style="color:#16a34a">70</span>
-    </div>
-    <div class="stat-card">
-      <h3>المرفوضة</h3>
-      <span style="color:#dc2626">15</span>
-    </div>
+<!-- الإحصائيات -->
+<div class="stats">
+  <div class="stat"><h4>إجمالي الأدلة</h4><span>120</span></div>
+  <div class="stat"><h4>قيد المراجعة</h4><span style="color:#d97706">35</span></div>
+  <div class="stat"><h4>المعتمدة</h4><span style="color:#16a34a">70</span></div>
+  <div class="stat"><h4>المرفوضة</h4><span style="color:#dc2626">15</span></div>
+</div>
+
+<!-- الرسوم -->
+<div class="charts">
+  <div class="box">
+    <h4>حالة الأدلة</h4>
+    <canvas id="statusChart"></canvas>
   </div>
-
-  <!-- الرسوم -->
-  <div class="charts">
-
-    <div class="chart-box">
-      <h4>حالة الأدلة</h4>
-      <canvas id="statusChart"></canvas>
-    </div>
-
-    <div class="chart-box">
-      <h4>الأدلة حسب المجالات</h4>
-      <canvas id="domainChart"></canvas>
-    </div>
-
+  <div class="box">
+    <h4>الأدلة حسب المجالات</h4>
+    <canvas id="domainChart"></canvas>
   </div>
+</div>
+
+<!-- الأقسام -->
+<div class="sections">
+<h3>الأدلة المرفوعة حسب الأقسام</h3>
+
+<div class="section-grid">
+
+<div class="section">
+<h4>قسم الرياضيات</h4>
+<p>خطط – سجلات – تقويم</p>
+<a href="department.html?dept=math">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>قسم العلوم</h4>
+<p>مختبرات – خطط – تقارير</p>
+<a href="department.html?dept=science">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>قسم اللغة العربية</h4>
+<p>الحلقة الثانية – خطط</p>
+<a href="department.html?dept=arabic">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>قسم الدراسات الاجتماعية</h4>
+<p>أنشطة – خطط</p>
+<a href="department.html?dept=social">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>قسم التربية الإسلامية</h4>
+<p>مناهج – تقويم</p>
+<a href="department.html?dept=islamic">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>الابتكار والموهبة</h4>
+<p>ابتكارات الطلبة</p>
+<a href="department.html?dept=innovation">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>الأنشطة المدرسية</h4>
+<p>برامج – فعاليات</p>
+<a href="department.html?dept=activities">عرض الأدلة</a>
+</div>
+
+<div class="section">
+<h4>التقويم الذاتي</h4>
+<p>خطط التحسين</p>
+<a href="department.html?dept=self">عرض الأدلة</a>
+</div>
+
+</div>
+</div>
 
 </div>
 
 <script>
-  // رسم دائري
-  new Chart(document.getElementById('statusChart'), {
-    type: 'pie',
-    data: {
-      labels: ['معتمدة', 'قيد المراجعة', 'مرفوضة'],
-      datasets: [{
-        data: [70, 35, 15],
-        backgroundColor: ['#16a34a', '#d97706', '#dc2626']
-      }]
-    }
-  });
+new Chart(document.getElementById("statusChart"),{
+type:"pie",
+data:{
+labels:["معتمدة","قيد المراجعة","مرفوضة"],
+datasets:[{
+data:[70,35,15],
+backgroundColor:["#16a34a","#d97706","#dc2626"]
+}]
+}
+});
 
-  // رسم طولي
-  new Chart(document.getElementById('domainChart'), {
-    type: 'bar',
-    data: {
-      labels: [
-        'الإنجاز الدراسي',
-        'النمو الشخصي',
-        'التدريس والتقويم',
-        'مناخ المدرسة',
-        'القيادة والحوكمة'
-      ],
-      datasets: [{
-        label: 'نسبة الإتقان %',
-        data: [80, 75, 70, 85, 78],
-        backgroundColor: '#1e3a8a'
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100
-        }
-      }
-    }
-  });
+new Chart(document.getElementById("domainChart"),{
+type:"bar",
+data:{
+labels:["الإنجاز","النمو","التدريس","المناخ","القيادة"],
+datasets:[{
+data:[80,75,70,85,78],
+backgroundColor:"#1e3a8a"
+}]
+},
+options:{scales:{y:{beginAtZero:true,max:100}}}
+});
 </script>
 
 </body>
