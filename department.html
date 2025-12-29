@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بَصْرَة | أدلة القسم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma,Arial;
+  background:#f4f6f9;
+}
+header{
+  background:#1e3a8a;
+  color:#fff;
+  padding:18px 30px;
+  font-size:22px;
+  font-weight:bold;
+}
+.container{
+  padding:25px;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.card h4{
+  margin-top:0;
+  color:#1e3a8a;
+}
+.meta{
+  font-size:14px;
+  color:#555;
+  margin-bottom:10px;
+}
+.actions{
+  margin-top:15px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.actions button{
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  font-size:13px;
+  cursor:pointer;
+  color:#fff;
+}
+.view{background:#2563eb}
+.review{background:#d97706}
+.edit{background:#7c3aed}
+.delete{background:#dc2626}
+</style>
+</head>
+
+<body>
+
+<header>
+بَصْرَة – عرض أدلة القسم
+</header>
+
+<div class="container">
+<h3 id="deptTitle"></h3>
+
+<div class="cards">
+
+<div class="card">
+  <h4>خطة قسم الرياضيات</h4>
+  <div class="meta">المجال: الإنجاز الدراسي | المعيار: التحصيل الدراسي</div>
+  <p>خطة القسم للفصل الدراسي الأول.</p>
+  <div class="actions">
+    <button class="view">عرض</button>
+    <button class="review">مراجعة</button>
+    <button class="edit">تعديل</button>
+    <button class="delete">حذف</button>
+  </div>
+</div>
+
+<div class="card">
+  <h4>سجل تقويم الطلبة</h4>
+  <div class="meta">المجال: التدريس والتقويم | المعيار: التقويم ومساندة التعلم</div>
+  <p>سجلات التقويم المستمر.</p>
+  <div class="actions">
+    <button class="view">عرض</button>
+    <button class="review">مراجعة</button>
+    <button class="edit">تعديل</button>
+    <button class="delete">حذف</button>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const dept = params.get("dept");
+
+const names = {
+  math:"قسم الرياضيات",
+  science:"قسم العلوم",
+  arabic:"قسم اللغة العربية",
+  social:"قسم الدراسات الاجتماعية",
+  islamic:"قسم التربية الإسلامية",
+  innovation:"الابتكار والموهبة",
+  activities:"الأنشطة المدرسية",
+  self:"التقويم الذاتي"
+};
+
+document.getElementById("deptTitle").innerText =
+"أدلة " + (names[dept] || "القسم");
+</script>
+
+</body>
+</html>
