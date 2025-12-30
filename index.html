@@ -11,6 +11,9 @@
   --bg:#f4f6fb;
   --card:#ffffff;
   --text:#1f2937;
+  --approved:#2e7d32;
+  --pending:#f9a825;
+  --rejected:#c62828;
 }
 body.dark{
   --bg:#0f172a;
@@ -22,81 +25,90 @@ body.dark{
 body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
 
 .topbar{
-  height:70px;
-  background:var(--main);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  font-size:26px;
-  font-weight:700;
+  height:70px;background:var(--main);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;font-size:26px;font-weight:700;
 }
-
-.topbar .actions{
-  position:absolute;
-  left:20px;
-  display:flex;
-  gap:10px;
-}
-
+.topbar .actions{position:absolute;left:20px;display:flex;gap:10px}
 .topbar button{
-  background:#ffffff22;
-  border:none;
-  color:#fff;
-  padding:6px 12px;
-  border-radius:6px;
-  cursor:pointer;
+  background:#ffffff22;border:none;color:#fff;
+  padding:6px 12px;border-radius:6px;cursor:pointer
 }
 
 .layout{display:flex}
 
 .sidebar{
-  width:260px;
-  background:#0b3c91;
-  min-height:calc(100vh - 70px);
-  padding-top:15px;
+  width:260px;background:#0b3c91;
+  min-height:calc(100vh - 70px);padding-top:15px
 }
-
 .sidebar a{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:14px 20px;
-  color:#fff;
-  text-decoration:none;
-  cursor:pointer;
-  font-size:16px;
+  display:flex;gap:10px;align-items:center;
+  padding:14px 20px;color:#fff;text-decoration:none;
+  cursor:pointer;font-size:16px
+}
+.sidebar a.active,.sidebar a:hover{
+  background:#1565c0;border-right:5px solid #ffeb3b
 }
 
-.sidebar a.active,
-.sidebar a:hover{
-  background:#1565c0;
-  border-right:5px solid #ffeb3b;
-}
-
-.content{
-  flex:1;
-  padding:30px;
-}
-
+.content{flex:1;padding:30px}
 .section{display:none}
 .section.active{display:block}
 
 .card{
   background:var(--card);
   border-radius:14px;
-  padding:30px;
-  max-width:700px;
+  padding:20px;
 }
 
 .center{text-align:center}
-.logo{
-  width:120px;
-  margin-bottom:15px;
+.logo{width:120px;margin-bottom:15px}
+
+/* الأدلة */
+.dept-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px
 }
-h1{margin:10px 0}
-p{line-height:1.8}
+.dept-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:15px;
+  text-align:center
+}
+.dept-card button{
+  margin-top:10px;
+  background:var(--main);
+  color:#fff;border:none;
+  padding:6px 12px;
+  border-radius:6px;cursor:pointer
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px
+}
+.filters input,.filters select{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc
+}
+
+.evidence-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px
+}
+.evidence-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:15px
+}
+.status{font-weight:700}
+.approved{color:var(--approved)}
+.pending{color:var(--pending)}
+.rejected{color:var(--rejected)}
 </style>
 </head>
 
@@ -124,13 +136,12 @@ p{line-height:1.8}
 <!-- الرئيسية -->
 <div id="home" class="section active">
   <div class="card center">
-    <img src="school-logo.png" class="logo" alt="شعار المدرسة">
+    <img src="school-logo.png" class="logo">
     <h1>بَصيرة</h1>
     <h3>مدرسة بحر عمان للتعليم الأساسي (1–12)</h3>
     <p>
-      نظام «بَصيرة» هو نظام رقمي يُعنى بتجميع وتنظيم
-      وتحليل الأدلة المدرسية وفق محاور التقويم المعتمدة،
-      لدعم مدير المدرسة في اتخاذ القرار وتحسين جودة الأداء.
+      نظام رقمي لتجميع وتحليل الأدلة المدرسية
+      وفق محاور التقويم المعتمدة لدعم القيادة المدرسية.
     </p>
   </div>
 </div>
@@ -138,19 +149,35 @@ p{line-height:1.8}
 <!-- الأدلة -->
 <div id="evidence" class="section">
   <h2>الأدلة المدرسية</h2>
-  <p>هنا سيتم عرض جميع الأدلة حسب الأقسام والمجالات.</p>
+
+  <!-- الأقسام -->
+  <div class="dept-grid" id="deptGrid"></div>
+
+  <!-- الفلاتر -->
+  <div class="filters">
+    <input id="search" placeholder="بحث عن دليل">
+    <select id="statusFilter">
+      <option value="">كل الحالات</option>
+      <option value="معتمد">معتمد</option>
+      <option value="قيد المراجعة">قيد المراجعة</option>
+      <option value="مرفوض">مرفوض</option>
+    </select>
+  </div>
+
+  <!-- الأدلة -->
+  <div class="evidence-grid" id="evidenceGrid"></div>
 </div>
 
 <!-- التقارير -->
 <div id="reports" class="section">
   <h2>التقارير</h2>
-  <p>تقارير إحصائية وتحليلية حول الأدلة وحالاتها.</p>
+  <p>سيتم تطوير التقارير في المرحلة القادمة.</p>
 </div>
 
 <!-- المساعد الذكي -->
 <div id="ai" class="section">
   <h2>المساعد الذكي</h2>
-  <p>مساعد ذكي لدعم مدير المدرسة في التحليل والتقويم.</p>
+  <p>مساعد ذكي لدعم مدير المدرسة.</p>
 </div>
 
 </div>
@@ -163,15 +190,55 @@ function showSection(id,el){
   document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
   el.classList.add('active');
 }
-
-function toggleMode(){
-  document.body.classList.toggle('dark');
+function toggleMode(){document.body.classList.toggle('dark')}
+function toggleLang(){
+  document.documentElement.dir =
+  document.documentElement.dir==='rtl'?'ltr':'rtl'
 }
 
-let lang='ar';
-function toggleLang(){
-  lang = lang==='ar'?'en':'ar';
-  document.documentElement.dir = lang==='ar'?'rtl':'ltr';
+/* الأقسام */
+const departments=[
+"الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية",
+"التربية الإسلامية","الدراسات الاجتماعية",
+"المختبرات","الموسيقى","الفنون",
+"الابتكار وريادة الأعمال","الأنشطة الطلابية",
+"التوجيه المهني","مصادر التعلم","شؤون الطلاب"
+];
+
+const evidences=[
+{dept:"الرياضيات",title:"خطة القسم",desc:"خطة فصلية",status:"معتمد"},
+{dept:"العلوم",title:"سجل المختبر",desc:"تجارب عملية",status:"قيد المراجعة"},
+{dept:"اللغة العربية",title:"خطة علاجية",desc:"ضعف القراءة",status:"مرفوض"}
+];
+
+const deptGrid=document.getElementById("deptGrid");
+const evidenceGrid=document.getElementById("evidenceGrid");
+
+departments.forEach(d=>{
+  deptGrid.innerHTML+=`
+  <div class="dept-card">
+    <strong>${d}</strong><br>
+    <button onclick="showDept('${d}')">عرض الأدلة</button>
+  </div>`;
+});
+
+function showDept(dept){
+  renderEvidence(dept);
+}
+
+function renderEvidence(dept){
+  evidenceGrid.innerHTML="";
+  evidences.filter(e=>!dept||e.dept===dept).forEach(e=>{
+    evidenceGrid.innerHTML+=`
+    <div class="evidence-card">
+      <h4>${e.title}</h4>
+      <p>${e.desc}</p>
+      <small>${e.dept}</small><br>
+      <span class="status ${e.status==='معتمد'?'approved':e.status==='قيد المراجعة'?'pending':'rejected'}">
+        ${e.status}
+      </span>
+    </div>`;
+  });
 }
 </script>
 
