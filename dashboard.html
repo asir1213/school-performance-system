@@ -11,197 +11,34 @@
 <style>
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 body{margin:0;background:#f3f6fb}
-
-/* Top */
-.topbar{
-  height:72px;
-  background:#0d47a1;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  font-weight:700
-}
-
-/* Layout */
+.topbar{height:72px;background:#0d47a1;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700}
 .layout{display:flex}
-
-/* Sidebar */
-.sidebar{
-  width:270px;
-  background:#0b3c91;
-  min-height:calc(100vh - 72px);
-  padding-top:15px
-}
-.sidebar a{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:15px 22px;
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-  cursor:pointer;
-  transition:.2s
-}
-.sidebar a i{width:22px;text-align:center}
-.sidebar a.active,
-.sidebar a:hover{
-  background:#1565c0;
-  border-right:5px solid #ffeb3b
-}
-
-/* Content */
-.content{
-  flex:1;
-  padding:25px
-}
+.sidebar{width:270px;background:#0b3c91;min-height:calc(100vh - 72px);padding-top:15px}
+.sidebar a{display:flex;align-items:center;gap:12px;padding:15px 22px;color:#fff;text-decoration:none;font-size:16px;cursor:pointer}
+.sidebar a.active,.sidebar a:hover{background:#1565c0;border-right:5px solid #ffeb3b}
+.content{flex:1;padding:25px}
 .section{display:none}
 .section.active{display:block}
 
-/* Cards */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-  margin-bottom:30px
-}
-.card{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 4px 8px rgba(0,0,0,.08)
-}
-.card h3{margin:0;font-size:28px}
-.card span{color:#555;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:25px}
+.card{background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.08)}
+.card h3{margin:0;font-size:26px}
+.green{color:#2e7d32}.gold{color:#f9a825}.red{color:#c62828}
 
-.green{color:#2e7d32}
-.gold{color:#f9a825}
-.red{color:#c62828}
+.filters{display:flex;gap:15px;margin-bottom:15px}
+.filters input,.filters select{padding:10px;border-radius:6px;border:1px solid #ccc}
 
-/* Charts */
-.charts{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-bottom:35px
-}
-.chart-box{
-  background:#fff;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 4px 8px rgba(0,0,0,.08);
-  height:260px
-}
+.evidence-list{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.evidence-card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 3px 6px rgba(0,0,0,.08)}
+.status{font-weight:600}
+.approved{color:#2e7d32}.pending{color:#f9a825}.rejected{color:#c62828}
 
-/* Departments */
-.depts{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px
+.upload-form input,.upload-form textarea,.upload-form select{
+  width:100%;padding:10px;margin-bottom:12px;border-radius:6px;border:1px solid #ccc
 }
-.dept{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 3px 6px rgba(0,0,0,.08);
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-.dept button{
-  background:#0d47a1;
-  color:#fff;
-  border:none;
-  padding:6px 14px;
-  border-radius:6px;
-  cursor:pointer
-}
+.dropzone{border:2px dashed #0d47a1;padding:25px;text-align:center;border-radius:10px;color:#555}
 
-/* Filters */
-.filters{
-  display:flex;
-  gap:15px;
-  margin-bottom:20px
-}
-.filters input,
-.filters select{
-  padding:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  font-size:14px
-}
-
-/* Evidence */
-.evidence-list{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px
-}
-.evidence-card{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 3px 6px rgba(0,0,0,.08)
-}
-.evidence-card h4{margin:0 0 6px}
-.meta{font-size:13px;color:#666}
-.status{margin:6px 0;font-weight:600}
-.approved{color:#2e7d32}
-.pending{color:#f9a825}
-.rejected{color:#c62828}
-
-/* Upload */
-.upload-form input,
-.upload-form textarea,
-.upload-form select{
-  width:100%;
-  padding:10px;
-  margin-bottom:12px;
-  border-radius:6px;
-  border:1px solid #ccc
-}
-.dropzone{
-  border:2px dashed #0d47a1;
-  padding:30px;
-  text-align:center;
-  border-radius:10px;
-  color:#555;
-  margin-bottom:15px
-}
-
-/* AI */
-.ai-box{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-bottom:20px
-}
-.ai-card{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 4px 8px rgba(0,0,0,.08)
-}
-.chat textarea{
-  width:100%;
-  height:90px;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ccc
-}
-
-button.main{
-  background:#0d47a1;
-  color:#fff;
-  border:none;
-  padding:10px 22px;
-  border-radius:6px;
-  cursor:pointer
-}
+button.main{background:#0d47a1;color:#fff;border:none;padding:10px 22px;border-radius:6px;cursor:pointer}
 </style>
 </head>
 
@@ -210,13 +47,11 @@ button.main{
 <div class="topbar">بَصيرة – نظام تقويم أداء المدارس</div>
 
 <div class="layout">
-
 <div class="sidebar">
   <a class="active" onclick="showSection('dashboard',this)"><i class="fa fa-home"></i> لوحة التحكم</a>
   <a onclick="showSection('evidence',this)"><i class="fa fa-folder-open"></i> الأدلة</a>
   <a onclick="showSection('upload',this)"><i class="fa fa-upload"></i> رفع دليل</a>
   <a onclick="showSection('reports',this)"><i class="fa fa-chart-pie"></i> التقارير</a>
-  <a onclick="showSection('assistant',this)"><i class="fa fa-robot"></i> المساعد الذكي</a>
 </div>
 
 <div class="content">
@@ -224,102 +59,50 @@ button.main{
 <!-- Dashboard -->
 <div id="dashboard" class="section active">
 <h2>لوحة التحكم</h2>
-
 <div class="cards">
-  <div class="card"><h3>160</h3><span>إجمالي الأدلة</span></div>
-  <div class="card green"><h3>90</h3><span>المعتمدة</span></div>
-  <div class="card gold"><h3>45</h3><span>قيد المراجعة</span></div>
-  <div class="card red"><h3>25</h3><span>المرفوضة</span></div>
-</div>
-
-<div class="charts">
-  <div class="chart-box"><canvas id="statusChart"></canvas></div>
-  <div class="chart-box"><canvas id="domainChart"></canvas></div>
-</div>
-
-<h3>الأقسام المدرسية</h3>
-<div class="depts">
-  <div class="dept">الرياضيات<button onclick="openEvidence('الرياضيات')">عرض الأدلة</button></div>
-  <div class="dept">العلوم<button onclick="openEvidence('العلوم')">عرض الأدلة</button></div>
-  <div class="dept">اللغة العربية<button onclick="openEvidence('اللغة العربية')">عرض الأدلة</button></div>
-  <div class="dept">اللغة الإنجليزية<button onclick="openEvidence('اللغة الإنجليزية')">عرض الأدلة</button></div>
-  <div class="dept">التربية الإسلامية<button onclick="openEvidence('التربية الإسلامية')">عرض الأدلة</button></div>
-  <div class="dept">الدراسات الاجتماعية<button onclick="openEvidence('الدراسات الاجتماعية')">عرض الأدلة</button></div>
-  <div class="dept">المختبرات<button onclick="openEvidence('المختبرات')">عرض الأدلة</button></div>
-  <div class="dept">الابتكار<button onclick="openEvidence('الابتكار')">عرض الأدلة</button></div>
+  <div class="card"><h3 id="totalCount">0</h3><span>إجمالي الأدلة</span></div>
+  <div class="card green"><h3 id="approvedCount">0</h3><span>المعتمدة</span></div>
+  <div class="card gold"><h3 id="pendingCount">0</h3><span>قيد المراجعة</span></div>
+  <div class="card red"><h3 id="rejectedCount">0</h3><span>المرفوضة</span></div>
 </div>
 </div>
 
 <!-- Evidence -->
 <div id="evidence" class="section">
-<h2 id="evidenceTitle">الأدلة</h2>
-
+<h2>الأدلة</h2>
 <div class="filters">
-  <input placeholder="بحث">
-  <select id="deptSelect">
-  <option value="">اختر القسم</option>
-</select>
-
-<select id="domainSelect">
-  <option value="">اختر المجال</option>
-</select>
-  
-  <select>
-    <option>جميع المجالات</option>
-    <option>الإنجاز الدراسي</option>
-    <option>النمو الشخصي</option>
-    <option>التدريس والتقويم</option>
-    <option>مناخ المدرسة</option>
-    <option>القيادة والحوكمة</option>
+  <input id="searchInput" placeholder="بحث بعنوان الدليل">
+  <select id="statusFilter">
+    <option value="">كل الحالات</option>
+    <option value="معتمدة">معتمدة</option>
+    <option value="قيد المراجعة">قيد المراجعة</option>
+    <option value="مرفوضة">مرفوضة</option>
   </select>
 </div>
-
-<div class="evidence-list">
-  <div class="evidence-card">
-    <h4>خطة قسم الرياضيات</h4>
-    <div class="meta">المجال: الإنجاز الدراسي</div>
-    <div class="status approved">معتمدة</div>
-  </div>
-  <div class="evidence-card">
-    <h4>ابتكار طلاب</h4>
-    <div class="meta">المجال: النمو الشخصي</div>
-    <div class="status pending">قيد المراجعة</div>
-  </div>
-</div>
+<div class="evidence-list" id="evidenceList"></div>
 </div>
 
 <!-- Upload -->
 <div id="upload" class="section">
 <h2>رفع دليل</h2>
 <div class="upload-form">
-  <input placeholder="عنوان الدليل">
-  <textarea placeholder="وصف الدليل"></textarea>
-  <select><option>اختر القسم</option></select>
-  <select><option>اختر المجال</option></select>
-  <div class="dropzone">اسحب الملف هنا أو اضغط للاختيار (جميع الملفات مدعومة)</div>
-  <input placeholder="أو رابط الدليل">
-  <button class="main">حفظ الدليل</button>
+  <input id="titleInput" placeholder="عنوان الدليل">
+  <textarea id="descInput" placeholder="وصف الدليل"></textarea>
+
+  <select id="deptSelect"><option value="">اختر القسم</option></select>
+  <select id="domainSelect"><option value="">اختر المجال</option></select>
+
+  <div class="dropzone">سحب وإفلات أو اختيار ملف (أي نوع)</div>
+  <input id="linkInput" placeholder="أو رابط الدليل (اختياري)">
+
+  <button class="main" onclick="saveEvidence()">حفظ الدليل</button>
 </div>
 </div>
 
 <!-- Reports -->
 <div id="reports" class="section">
 <h2>التقارير</h2>
-<p>تقارير تحليلية شاملة عن الأداء المدرسي.</p>
-</div>
-
-<!-- Assistant -->
-<div id="assistant" class="section">
-<h2>المساعد الذكي</h2>
-<div class="ai-box">
-  <div class="ai-card">✍️ كتابة عبارة تقييمية</div>
-  <div class="ai-card">📊 تحليل الأدلة</div>
-  <div class="ai-card">🎯 اقتراح تطوير</div>
-</div>
-<div class="chat">
-  <textarea placeholder="اكتب سؤالك هنا..."></textarea>
-  <button class="main">إرسال</button>
-</div>
+<p>يتم تحديث الأرقام تلقائيًا من الأدلة المرفوعة.</p>
 </div>
 
 </div>
@@ -333,61 +116,53 @@ function showSection(id,el){
   el.classList.add('active');
 }
 
-function openEvidence(dept){
-  document.getElementById('evidenceTitle').innerText='أدلة قسم: '+dept;
-  showSection('evidence',document.querySelectorAll('.sidebar a')[1]);
+/* بيانات */
+const departments=["الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية","التربية الإسلامية","الدراسات الاجتماعية","تقنية المعلومات","المختبرات","الموسيقى","الفنون","الابتكار","الأنشطة","التوجيه المهني","مصادر التعلم","شؤون الطلاب","الإدارة المدرسية"];
+const domains=["الإنجاز الدراسي","النمو الشخصي","التدريس والتقويم","مناخ المدرسة","القيادة والحوكمة"];
+
+departments.forEach(d=>deptSelect.add(new Option(d,d)));
+domains.forEach(d=>domainSelect.add(new Option(d,d)));
+
+let evidences=[];
+
+/* حفظ دليل */
+function saveEvidence(){
+  const ev={
+    title:titleInput.value,
+    desc:descInput.value,
+    dept:deptSelect.value,
+    domain:domainSelect.value,
+    status:"قيد المراجعة"
+  };
+  evidences.push(ev);
+  renderEvidence();
+  updateDashboard();
+  alert("تم حفظ الدليل بنجاح");
 }
 
-new Chart(statusChart,{
-  type:'doughnut',
-  data:{labels:['معتمدة','قيد المراجعة','مرفوضة'],
-  datasets:[{data:[90,45,25],
-  backgroundColor:['#2e7d32','#f9a825','#c62828']}]},
-  options:{maintainAspectRatio:false}
-});
+/* عرض الأدلة */
+function renderEvidence(){
+  evidenceList.innerHTML="";
+  evidences.forEach(ev=>{
+    const card=document.createElement("div");
+    card.className="evidence-card";
+    card.innerHTML=`
+      <h4>${ev.title}</h4>
+      <p>${ev.desc}</p>
+      <small>${ev.dept} | ${ev.domain}</small>
+      <div class="status pending">${ev.status}</div>
+    `;
+    evidenceList.appendChild(card);
+  });
+}
 
-new Chart(domainChart,{
-  type:'bar',
-  data:{labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
-  datasets:[{data:[88,72,80,90,75],backgroundColor:'#0d47a1'}]},
-  options:{maintainAspectRatio:false,plugins:{legend:{display:false}}}
-});
-
-  <script>
-const departments = [
-  "الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية",
-  "التربية الإسلامية","الدراسات الاجتماعية","تقنية المعلومات",
-  "المختبرات","الموسيقى","الفنون التشكيلية",
-  "الابتكار وريادة الأعمال","الأنشطة الطلابية",
-  "التوجيه المهني","مصادر التعلم","شؤون الطلاب","الإدارة المدرسية"
-];
-
-const domains = [
-  "الإنجاز الدراسي",
-  "النمو الشخصي",
-  "التدريس والتقويم",
-  "مناخ المدرسة وبيئة التعلم",
-  "القيادة والإدارة والحوكمة"
-];
-
-const deptSelect = document.getElementById("deptSelect");
-const domainSelect = document.getElementById("domainSelect");
-
-departments.forEach(d=>{
-  const opt = document.createElement("option");
-  opt.value = d;
-  opt.textContent = d;
-  deptSelect.appendChild(opt);
-});
-
-domains.forEach(d=>{
-  const opt = document.createElement("option");
-  opt.value = d;
-  opt.textContent = d;
-  domainSelect.appendChild(opt);
-});
-</script>
-
+/* تحديث لوحة التحكم */
+function updateDashboard(){
+  totalCount.textContent=evidences.length;
+  approvedCount.textContent=evidences.filter(e=>e.status=="معتمدة").length;
+  pendingCount.textContent=evidences.filter(e=>e.status=="قيد المراجعة").length;
+  rejectedCount.textContent=evidences.filter(e=>e.status=="مرفوضة").length;
+}
 </script>
 
 </body>
