@@ -256,12 +256,14 @@ button.main{
 
 <div class="filters">
   <input placeholder="بحث">
-  <select>
-    <option>جميع الحالات</option>
-    <option>معتمدة</option>
-    <option>قيد المراجعة</option>
-    <option>مرفوضة</option>
-  </select>
+  <select id="deptSelect">
+  <option value="">اختر القسم</option>
+</select>
+
+<select id="domainSelect">
+  <option value="">اختر المجال</option>
+</select>
+  
   <select>
     <option>جميع المجالات</option>
     <option>الإنجاز الدراسي</option>
@@ -350,6 +352,42 @@ new Chart(domainChart,{
   datasets:[{data:[88,72,80,90,75],backgroundColor:'#0d47a1'}]},
   options:{maintainAspectRatio:false,plugins:{legend:{display:false}}}
 });
+
+  <script>
+const departments = [
+  "الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية",
+  "التربية الإسلامية","الدراسات الاجتماعية","تقنية المعلومات",
+  "المختبرات","الموسيقى","الفنون التشكيلية",
+  "الابتكار وريادة الأعمال","الأنشطة الطلابية",
+  "التوجيه المهني","مصادر التعلم","شؤون الطلاب","الإدارة المدرسية"
+];
+
+const domains = [
+  "الإنجاز الدراسي",
+  "النمو الشخصي",
+  "التدريس والتقويم",
+  "مناخ المدرسة وبيئة التعلم",
+  "القيادة والإدارة والحوكمة"
+];
+
+const deptSelect = document.getElementById("deptSelect");
+const domainSelect = document.getElementById("domainSelect");
+
+departments.forEach(d=>{
+  const opt = document.createElement("option");
+  opt.value = d;
+  opt.textContent = d;
+  deptSelect.appendChild(opt);
+});
+
+domains.forEach(d=>{
+  const opt = document.createElement("option");
+  opt.value = d;
+  opt.textContent = d;
+  domainSelect.appendChild(opt);
+});
+</script>
+
 </script>
 
 </body>
