@@ -22,7 +22,7 @@ body.dark{
 }
 
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
+body{margin:0;background:var(--bg);color:var(--text)}
 
 .topbar{
   height:70px;background:var(--main);color:#fff;
@@ -36,7 +36,6 @@ body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
 }
 
 .layout{display:flex}
-
 .sidebar{
   width:260px;background:#0b3c91;
   min-height:calc(100vh - 70px);padding-top:15px
@@ -58,57 +57,32 @@ body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
   background:var(--card);
   border-radius:14px;
   padding:20px;
+  margin-bottom:20px
 }
-
-.center{text-align:center}
-.logo{width:120px;margin-bottom:15px}
 
 /* الأدلة */
-.dept-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:25px
-}
-.dept-card{
-  background:var(--card);
-  border-radius:12px;
-  padding:15px;
-  text-align:center
-}
+.dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.dept-card{background:var(--card);padding:15px;border-radius:12px;text-align:center}
 .dept-card button{
-  margin-top:10px;
-  background:var(--main);
-  color:#fff;border:none;
-  padding:6px 12px;
-  border-radius:6px;cursor:pointer
+  margin-top:10px;background:var(--main);color:#fff;
+  border:none;padding:6px 12px;border-radius:6px;cursor:pointer
 }
 
-.filters{
-  display:flex;
-  gap:10px;
+.evidence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.evidence-card{background:var(--card);padding:15px;border-radius:12px}
+.status{font-weight:700}
+.pending{color:var(--pending)}
+
+/* رفع الدليل */
+.upload-form input,.upload-form select,.upload-form textarea{
+  width:100%;padding:10px;margin-bottom:12px;
+  border-radius:6px;border:1px solid #ccc
+}
+.drop-zone{
+  border:2px dashed #999;
+  padding:20px;text-align:center;border-radius:10px;
   margin-bottom:15px
 }
-.filters input,.filters select{
-  padding:8px;
-  border-radius:6px;
-  border:1px solid #ccc
-}
-
-.evidence-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px
-}
-.evidence-card{
-  background:var(--card);
-  border-radius:12px;
-  padding:15px
-}
-.status{font-weight:700}
-.approved{color:var(--approved)}
-.pending{color:var(--pending)}
-.rejected{color:var(--rejected)}
 </style>
 </head>
 
@@ -117,7 +91,6 @@ body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
 <div class="topbar">
   بَصيرة
   <div class="actions">
-    <button onclick="toggleLang()">🌐</button>
     <button onclick="toggleMode()">🌙</button>
   </div>
 </div>
@@ -127,58 +100,45 @@ body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
 <div class="sidebar">
   <a class="active" onclick="showSection('home',this)">🏠 الرئيسية</a>
   <a onclick="showSection('evidence',this)">📁 الأدلة</a>
+  <a onclick="showSection('upload',this)">⬆️ رفع دليل</a>
   <a onclick="showSection('reports',this)">📊 التقارير</a>
   <a onclick="showSection('ai',this)">🤖 المساعد الذكي</a>
 </div>
 
 <div class="content">
 
-<!-- الرئيسية -->
 <div id="home" class="section active">
   <div class="card center">
-    <img src="school-logo.png" class="logo">
     <h1>بَصيرة</h1>
     <h3>مدرسة بحر عمان للتعليم الأساسي (1–12)</h3>
-    <p>
-      نظام رقمي لتجميع وتحليل الأدلة المدرسية
-      وفق محاور التقويم المعتمدة لدعم القيادة المدرسية.
-    </p>
+    <p>نظام رقمي لإدارة وتقويم الأدلة المدرسية.</p>
   </div>
 </div>
 
-<!-- الأدلة -->
 <div id="evidence" class="section">
   <h2>الأدلة المدرسية</h2>
-
-  <!-- الأقسام -->
-  <div class="dept-grid" id="deptGrid"></div>
-
-  <!-- الفلاتر -->
-  <div class="filters">
-    <input id="search" placeholder="بحث عن دليل">
-    <select id="statusFilter">
-      <option value="">كل الحالات</option>
-      <option value="معتمد">معتمد</option>
-      <option value="قيد المراجعة">قيد المراجعة</option>
-      <option value="مرفوض">مرفوض</option>
-    </select>
-  </div>
-
-  <!-- الأدلة -->
   <div class="evidence-grid" id="evidenceGrid"></div>
 </div>
 
-<!-- التقارير -->
-<div id="reports" class="section">
-  <h2>التقارير</h2>
-  <p>سيتم تطوير التقارير في المرحلة القادمة.</p>
+<div id="upload" class="section">
+  <h2>رفع دليل</h2>
+  <div class="card upload-form">
+    <input id="title" placeholder="عنوان الدليل">
+    <textarea id="desc" placeholder="وصف الدليل"></textarea>
+
+    <select id="dept"></select>
+
+    <div class="drop-zone">
+      اسحب الملف هنا أو اختر ملفًا
+      <input type="file">
+    </div>
+
+    <button onclick="saveEvidence()">حفظ الدليل</button>
+  </div>
 </div>
 
-<!-- المساعد الذكي -->
-<div id="ai" class="section">
-  <h2>المساعد الذكي</h2>
-  <p>مساعد ذكي لدعم مدير المدرسة.</p>
-</div>
+<div id="reports" class="section"><h2>التقارير</h2></div>
+<div id="ai" class="section"><h2>المساعد الذكي</h2></div>
 
 </div>
 </div>
@@ -191,52 +151,38 @@ function showSection(id,el){
   el.classList.add('active');
 }
 function toggleMode(){document.body.classList.toggle('dark')}
-function toggleLang(){
-  document.documentElement.dir =
-  document.documentElement.dir==='rtl'?'ltr':'rtl'
-}
 
-/* الأقسام */
 const departments=[
 "الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية",
-"التربية الإسلامية","الدراسات الاجتماعية",
-"المختبرات","الموسيقى","الفنون",
-"الابتكار وريادة الأعمال","الأنشطة الطلابية",
-"التوجيه المهني","مصادر التعلم","شؤون الطلاب"
+"التربية الإسلامية","الدراسات الاجتماعية","المختبرات",
+"الموسيقى","الفنون","الابتكار وريادة الأعمال"
 ];
 
-const evidences=[
-{dept:"الرياضيات",title:"خطة القسم",desc:"خطة فصلية",status:"معتمد"},
-{dept:"العلوم",title:"سجل المختبر",desc:"تجارب عملية",status:"قيد المراجعة"},
-{dept:"اللغة العربية",title:"خطة علاجية",desc:"ضعف القراءة",status:"مرفوض"}
-];
+const deptSelect=document.getElementById("dept");
+departments.forEach(d=>deptSelect.add(new Option(d,d)));
 
-const deptGrid=document.getElementById("deptGrid");
-const evidenceGrid=document.getElementById("evidenceGrid");
+let evidences=[];
 
-departments.forEach(d=>{
-  deptGrid.innerHTML+=`
-  <div class="dept-card">
-    <strong>${d}</strong><br>
-    <button onclick="showDept('${d}')">عرض الأدلة</button>
-  </div>`;
-});
-
-function showDept(dept){
-  renderEvidence(dept);
+function saveEvidence(){
+  evidences.push({
+    title:title.value,
+    desc:desc.value,
+    dept:dept.value,
+    status:"قيد المراجعة"
+  });
+  renderEvidence();
+  alert("تم حفظ الدليل");
 }
 
-function renderEvidence(dept){
+function renderEvidence(){
   evidenceGrid.innerHTML="";
-  evidences.filter(e=>!dept||e.dept===dept).forEach(e=>{
+  evidences.forEach(e=>{
     evidenceGrid.innerHTML+=`
     <div class="evidence-card">
       <h4>${e.title}</h4>
       <p>${e.desc}</p>
       <small>${e.dept}</small><br>
-      <span class="status ${e.status==='معتمد'?'approved':e.status==='قيد المراجعة'?'pending':'rejected'}">
-        ${e.status}
-      </span>
+      <span class="status pending">${e.status}</span>
     </div>`;
   });
 }
