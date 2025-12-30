@@ -10,13 +10,19 @@
 
 <style>
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{margin:0;background:#f4f7fb}
+body{margin:0;background:#f3f6fb}
 
-/* Top Bar */
+/* Top */
 .topbar{
-  height:70px;background:#0d47a1;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:700
+  height:72px;
+  background:#0d47a1;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:1px
 }
 
 /* Layout */
@@ -24,120 +30,99 @@ body{margin:0;background:#f4f7fb}
 
 /* Sidebar */
 .sidebar{
-  width:240px;background:#0b3c91;color:#fff;
-  min-height:calc(100vh - 70px);padding-top:20px
+  width:260px;
+  background:#0b3c91;
+  min-height:calc(100vh - 72px);
+  padding-top:15px
 }
 .sidebar a{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 20px;color:#fff;
-  text-decoration:none;font-size:16px;cursor:pointer
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px 22px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s
 }
-.sidebar a:hover,.sidebar a.active{
-  background:#1565c0;border-right:5px solid #ffeb3b
+.sidebar a i{width:22px;text-align:center}
+.sidebar a:hover,
+.sidebar a.active{
+  background:#1565c0;
+  border-right:5px solid #ffeb3b
 }
 
 /* Content */
-.content{flex:1;padding:25px}
-
-/* Sections */
+.content{
+  flex:1;
+  padding:25px
+}
 .section{display:none}
 .section.active{display:block}
 
 /* Cards */
 .cards{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:20px;margin-bottom:25px
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-bottom:30px
 }
 .card{
-  background:#fff;padding:20px;border-radius:10px;
-  text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 8px rgba(0,0,0,.08)
 }
-.card span{display:block;margin-top:6px;font-size:14px;color:#555}
-.green{color:#2e7d32}.gold{color:#f9a825}.red{color:#c62828}
+.card h3{margin:0;font-size:28px}
+.card span{color:#555;font-size:14px}
+
+/* Colors */
+.green{color:#2e7d32}
+.gold{color:#f9a825}
+.red{color:#c62828}
 
 /* Charts */
 .charts{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:20px;margin-bottom:30px
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-bottom:35px
 }
 .chart-box{
-  background:#fff;padding:15px;border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);
-  height:260px;display:flex;
-  flex-direction:column;justify-content:center
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 4px 8px rgba(0,0,0,.08);
+  height:260px
 }
-.chart-box canvas{max-height:180px}
 
 /* Departments */
+h3{margin-bottom:15px}
 .depts{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:15px;margin-bottom:30px
-}
-.dept{
-  background:#fff;padding:15px;border-radius:8px;
-  box-shadow:0 2px 4px rgba(0,0,0,.1);
-  display:flex;justify-content:space-between;align-items:center
-}
-.dept button{
-  background:#0d47a1;color:#fff;border:none;
-  padding:6px 12px;border-radius:6px;cursor:pointer
-}
-
-/* Filters */
-.filters{
-  display:flex;gap:15px;margin-bottom:20px
-}
-.filters input,.filters select{
-  padding:10px;border-radius:6px;border:1px solid #ccc;
-  font-size:14px
-}
-
-/* Evidence Cards */
-.evidence-list{
-  display:grid;grid-template-columns:repeat(2,1fr);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
   gap:15px
 }
-.evidence-card{
-  background:#fff;padding:15px;border-radius:8px;
-  box-shadow:0 2px 4px rgba(0,0,0,.1)
+.dept{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 3px 6px rgba(0,0,0,.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center
 }
-.status{font-size:13px;font-weight:600;margin:8px 0}
-.approved{color:#2e7d32}
-.pending{color:#f9a825}
-.rejected{color:#c62828}
-.actions button{
-  border:none;padding:6px 10px;border-radius:5px;
-  margin-left:5px;cursor:pointer;font-size:13px
-}
-.view{background:#0d47a1;color:#fff}
-.edit{background:#f9a825}
-.delete{background:#c62828;color:#fff}
-
-/* Upload */
-.upload-box{
-  background:#fff;border:2px dashed #0d47a1;
-  padding:40px;text-align:center;border-radius:10px
-}
-
-/* AI Assistant */
-.ai-box{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:20px;margin-bottom:25px
-}
-.ai-card{
-  background:#fff;padding:20px;border-radius:10px;
-  text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)
-}
-.chat{
-  background:#fff;border-radius:10px;padding:15px
-}
-.chat textarea{
-  width:100%;height:90px;border:1px solid #ccc;
-  border-radius:8px;padding:10px
-}
-.chat button{
-  margin-top:10px;background:#0d47a1;color:#fff;
-  border:none;padding:10px 20px;border-radius:6px
+.dept span{font-size:15px}
+.dept button{
+  background:#0d47a1;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px
 }
 </style>
 </head>
@@ -150,11 +135,21 @@ body{margin:0;background:#f4f7fb}
 
 <!-- Sidebar -->
 <div class="sidebar">
-  <a class="active" onclick="showSection('dashboard',this)"><i class="fa fa-chart-line"></i> لوحة التحكم</a>
-  <a onclick="showSection('evidence',this)"><i class="fa fa-folder-open"></i> الأدلة</a>
-  <a onclick="showSection('upload',this)"><i class="fa fa-upload"></i> رفع دليل</a>
-  <a onclick="showSection('reports',this)"><i class="fa fa-file-alt"></i> التقارير</a>
-  <a onclick="showSection('assistant',this)"><i class="fa fa-robot"></i> المساعد الذكي</a>
+  <a class="active" onclick="showSection('dashboard',this)">
+    <i class="fa fa-chart-line"></i> لوحة التحكم
+  </a>
+  <a onclick="showSection('evidence',this)">
+    <i class="fa fa-folder-open"></i> الأدلة
+  </a>
+  <a onclick="showSection('upload',this)">
+    <i class="fa fa-upload"></i> رفع دليل
+  </a>
+  <a onclick="showSection('reports',this)">
+    <i class="fa fa-file-alt"></i> التقارير
+  </a>
+  <a onclick="showSection('assistant',this)">
+    <i class="fa fa-robot"></i> المساعد الذكي
+  </a>
 </div>
 
 <div class="content">
@@ -164,10 +159,18 @@ body{margin:0;background:#f4f7fb}
 <h2>لوحة التحكم</h2>
 
 <div class="cards">
-  <div class="card">120<span>إجمالي الأدلة</span></div>
-  <div class="card green">70<span>المعتمدة</span></div>
-  <div class="card gold">35<span>قيد المراجعة</span></div>
-  <div class="card red">15<span>المرفوضة</span></div>
+  <div class="card">
+    <h3>148</h3><span>إجمالي الأدلة</span>
+  </div>
+  <div class="card green">
+    <h3>82</h3><span>الأدلة المعتمدة</span>
+  </div>
+  <div class="card gold">
+    <h3>44</h3><span>قيد المراجعة</span>
+  </div>
+  <div class="card red">
+    <h3>22</h3><span>الأدلة المرفوضة</span>
+  </div>
 </div>
 
 <div class="charts">
@@ -175,64 +178,35 @@ body{margin:0;background:#f4f7fb}
   <div class="chart-box"><canvas id="domainChart"></canvas></div>
 </div>
 
-<h3>الأقسام</h3>
+<h3>الأقسام المدرسية</h3>
 <div class="depts">
-  <div class="dept">الرياضيات<button onclick="openEvidence('الرياضيات')">عرض الأدلة</button></div>
-  <div class="dept">العلوم<button onclick="openEvidence('العلوم')">عرض الأدلة</button></div>
-  <div class="dept">اللغة العربية<button onclick="openEvidence('اللغة العربية')">عرض الأدلة</button></div>
-  <div class="dept">اللغة الإنجليزية<button onclick="openEvidence('اللغة الإنجليزية')">عرض الأدلة</button></div>
-  <div class="dept">التربية الإسلامية<button onclick="openEvidence('التربية الإسلامية')">عرض الأدلة</button></div>
-  <div class="dept">الدراسات الاجتماعية<button onclick="openEvidence('الدراسات الاجتماعية')">عرض الأدلة</button></div>
-  <div class="dept">المختبرات<button onclick="openEvidence('المختبرات')">عرض الأدلة</button></div>
-  <div class="dept">الابتكار وريادة الأعمال<button onclick="openEvidence('الابتكار')">عرض الأدلة</button></div>
+  <div class="dept"><span>الرياضيات</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>العلوم</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>اللغة العربية</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>اللغة الإنجليزية</span><button>عرض الأدلة</button></div>
+
+  <div class="dept"><span>التربية الإسلامية</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>الدراسات الاجتماعية</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>تقنية المعلومات</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>المختبرات</span><button>عرض الأدلة</button></div>
+
+  <div class="dept"><span>الموسيقى</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>الفنون التشكيلية</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>الابتكار وريادة الأعمال</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>الأنشطة الطلابية</span><button>عرض الأدلة</button></div>
+
+  <div class="dept"><span>التوجيه المهني</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>مصادر التعلم</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>شؤون الطلاب</span><button>عرض الأدلة</button></div>
+  <div class="dept"><span>الإدارة المدرسية</span><button>عرض الأدلة</button></div>
 </div>
 </div>
 
-<!-- Evidence -->
-<div id="evidence" class="section">
-<h2 id="evidenceTitle">الأدلة</h2>
-<div class="filters">
-  <input placeholder="بحث...">
-  <select><option>جميع الحالات</option><option>معتمدة</option><option>قيد المراجعة</option><option>مرفوضة</option></select>
-</div>
-<div class="evidence-list">
-  <div class="evidence-card">
-    <h4>خطة القسم</h4>
-    <div class="status approved">معتمدة</div>
-    <div class="actions">
-      <button class="view">عرض</button>
-      <button class="edit">تعديل</button>
-      <button class="delete">حذف</button>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- Upload -->
-<div id="upload" class="section">
-<h2>رفع دليل</h2>
-<div class="upload-box">اسحب الملف هنا أو اضغط للاختيار (جميع الملفات مدعومة)</div>
-</div>
-
-<!-- Reports -->
-<div id="reports" class="section">
-<h2>التقارير</h2>
-<p>تقارير وتحليلات الأداء المدرسي.</p>
-</div>
-
-<!-- Assistant -->
-<div id="assistant" class="section">
-<h2>المساعد الذكي</h2>
-<div class="ai-box">
-  <div class="ai-card">✍️ كتابة عبارة تقييمية</div>
-  <div class="ai-card">📊 تحليل الأدلة</div>
-  <div class="ai-card">🎯 اقتراح تطوير</div>
-</div>
-<div class="chat">
-  <textarea placeholder="اكتب سؤالك هنا..."></textarea>
-  <button>إرسال</button>
-</div>
-</div>
+<!-- Placeholder Sections -->
+<div id="evidence" class="section"><h2>الأدلة</h2></div>
+<div id="upload" class="section"><h2>رفع دليل</h2></div>
+<div id="reports" class="section"><h2>التقارير</h2></div>
+<div id="assistant" class="section"><h2>المساعد الذكي</h2></div>
 
 </div>
 </div>
@@ -244,22 +218,32 @@ function showSection(id,el){
   document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
   el.classList.add('active');
 }
-function openEvidence(dept){
-  document.getElementById('evidenceTitle').innerText='أدلة قسم: '+dept;
-  showSection('evidence',document.querySelectorAll('.sidebar a')[1]);
-}
+
 new Chart(statusChart,{
   type:'doughnut',
-  data:{labels:['معتمدة','قيد المراجعة','مرفوضة'],
-  datasets:[{data:[70,35,15],
-  backgroundColor:['#2e7d32','#f9a825','#c62828']}]},
+  data:{
+    labels:['معتمدة','قيد المراجعة','مرفوضة'],
+    datasets:[{
+      data:[82,44,22],
+      backgroundColor:['#2e7d32','#f9a825','#c62828']
+    }]
+  },
   options:{maintainAspectRatio:false}
 });
+
 new Chart(domainChart,{
   type:'bar',
-  data:{labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
-  datasets:[{data:[80,70,65,85,75],backgroundColor:'#0d47a1'}]},
-  options:{maintainAspectRatio:false,plugins:{legend:{display:false}}}
+  data:{
+    labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
+    datasets:[{
+      data:[85,70,78,90,73],
+      backgroundColor:'#0d47a1'
+    }]
+  },
+  options:{
+    maintainAspectRatio:false,
+    plugins:{legend:{display:false}}
+  }
 });
 </script>
 
