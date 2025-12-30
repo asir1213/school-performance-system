@@ -63,15 +63,15 @@ body{margin:0;background:#f4f7fb}
 .chart-box{
   background:#fff;padding:15px;border-radius:10px;
   box-shadow:0 2px 6px rgba(0,0,0,.1);
-  height:280px;display:flex;
+  height:260px;display:flex;
   flex-direction:column;justify-content:center
 }
-.chart-box canvas{max-height:200px}
+.chart-box canvas{max-height:180px}
 
 /* Departments */
 .depts{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:15px
+  gap:15px;margin-bottom:30px
 }
 .dept{
   background:#fff;padding:15px;border-radius:8px;
@@ -83,11 +83,40 @@ body{margin:0;background:#f4f7fb}
   padding:6px 12px;border-radius:6px;cursor:pointer
 }
 
+/* Filters */
+.filters{
+  display:flex;gap:15px;margin-bottom:20px
+}
+.filters input,.filters select{
+  padding:10px;border-radius:6px;border:1px solid #ccc;
+  font-size:14px
+}
+
 /* Evidence Cards */
+.evidence-list{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:15px
+}
 .evidence-card{
   background:#fff;padding:15px;border-radius:8px;
-  box-shadow:0 2px 4px rgba(0,0,0,.1);
-  margin-bottom:15px
+  box-shadow:0 2px 4px rgba(0,0,0,.1)
+}
+.status{font-size:13px;font-weight:600;margin:8px 0}
+.approved{color:#2e7d32}
+.pending{color:#f9a825}
+.rejected{color:#c62828}
+.actions button{
+  border:none;padding:6px 10px;border-radius:5px;
+  margin-left:5px;cursor:pointer;font-size:13px
+}
+.view{background:#0d47a1;color:#fff}
+.edit{background:#f9a825}
+.delete{background:#c62828;color:#fff}
+
+/* Upload */
+.upload-box{
+  background:#fff;border:2px dashed #0d47a1;
+  padding:40px;text-align:center;border-radius:10px
 }
 
 /* AI Assistant */
@@ -121,24 +150,13 @@ body{margin:0;background:#f4f7fb}
 
 <!-- Sidebar -->
 <div class="sidebar">
-  <a class="active" onclick="showSection('dashboard',this)">
-    <i class="fa fa-chart-line"></i> لوحة التحكم
-  </a>
-  <a onclick="showSection('evidence',this)">
-    <i class="fa fa-folder-open"></i> الأدلة
-  </a>
-  <a onclick="showSection('upload',this)">
-    <i class="fa fa-upload"></i> رفع دليل
-  </a>
-  <a onclick="showSection('reports',this)">
-    <i class="fa fa-file-alt"></i> التقارير
-  </a>
-  <a onclick="showSection('assistant',this)">
-    <i class="fa fa-robot"></i> المساعد الذكي
-  </a>
+  <a class="active" onclick="showSection('dashboard',this)"><i class="fa fa-chart-line"></i> لوحة التحكم</a>
+  <a onclick="showSection('evidence',this)"><i class="fa fa-folder-open"></i> الأدلة</a>
+  <a onclick="showSection('upload',this)"><i class="fa fa-upload"></i> رفع دليل</a>
+  <a onclick="showSection('reports',this)"><i class="fa fa-file-alt"></i> التقارير</a>
+  <a onclick="showSection('assistant',this)"><i class="fa fa-robot"></i> المساعد الذكي</a>
 </div>
 
-<!-- Content -->
 <div class="content">
 
 <!-- Dashboard -->
@@ -153,14 +171,8 @@ body{margin:0;background:#f4f7fb}
 </div>
 
 <div class="charts">
-  <div class="chart-box">
-    <h3>حالة الأدلة</h3>
-    <canvas id="statusChart"></canvas>
-  </div>
-  <div class="chart-box">
-    <h3>الأدلة حسب المجالات</h3>
-    <canvas id="domainChart"></canvas>
-  </div>
+  <div class="chart-box"><canvas id="statusChart"></canvas></div>
+  <div class="chart-box"><canvas id="domainChart"></canvas></div>
 </div>
 
 <h3>الأقسام</h3>
@@ -173,25 +185,33 @@ body{margin:0;background:#f4f7fb}
   <div class="dept">الدراسات الاجتماعية<button onclick="openEvidence('الدراسات الاجتماعية')">عرض الأدلة</button></div>
   <div class="dept">المختبرات<button onclick="openEvidence('المختبرات')">عرض الأدلة</button></div>
   <div class="dept">الابتكار وريادة الأعمال<button onclick="openEvidence('الابتكار')">عرض الأدلة</button></div>
-  <div class="dept">الموسيقى<button onclick="openEvidence('الموسيقى')">عرض الأدلة</button></div>
-  <div class="dept">الفنون<button onclick="openEvidence('الفنون')">عرض الأدلة</button></div>
-  <div class="dept">الأنشطة المدرسية<button onclick="openEvidence('الأنشطة')">عرض الأدلة</button></div>
-  <div class="dept">التوجيه المهني<button onclick="openEvidence('التوجيه المهني')">عرض الأدلة</button></div>
 </div>
 </div>
 
 <!-- Evidence -->
 <div id="evidence" class="section">
 <h2 id="evidenceTitle">الأدلة</h2>
-<div class="evidence-card">خطة القسم – الفصل الأول</div>
-<div class="evidence-card">ابتكارات الطلبة</div>
-<div class="evidence-card">سجل الأنشطة</div>
+<div class="filters">
+  <input placeholder="بحث...">
+  <select><option>جميع الحالات</option><option>معتمدة</option><option>قيد المراجعة</option><option>مرفوضة</option></select>
+</div>
+<div class="evidence-list">
+  <div class="evidence-card">
+    <h4>خطة القسم</h4>
+    <div class="status approved">معتمدة</div>
+    <div class="actions">
+      <button class="view">عرض</button>
+      <button class="edit">تعديل</button>
+      <button class="delete">حذف</button>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- Upload -->
 <div id="upload" class="section">
 <h2>رفع دليل</h2>
-<p>يدعم جميع أنواع الملفات مع السحب والإفلات.</p>
+<div class="upload-box">اسحب الملف هنا أو اضغط للاختيار (جميع الملفات مدعومة)</div>
 </div>
 
 <!-- Reports -->
@@ -224,29 +244,22 @@ function showSection(id,el){
   document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
   el.classList.add('active');
 }
-
 function openEvidence(dept){
-  document.getElementById('evidenceTitle').innerText = 'أدلة قسم: ' + dept;
+  document.getElementById('evidenceTitle').innerText='أدلة قسم: '+dept;
   showSection('evidence',document.querySelectorAll('.sidebar a')[1]);
 }
-
 new Chart(statusChart,{
   type:'doughnut',
-  data:{
-    labels:['معتمدة','قيد المراجعة','مرفوضة'],
-    datasets:[{data:[70,35,15],
-      backgroundColor:['#2e7d32','#f9a825','#c62828']}]
-  },
-  options:{responsive:true,maintainAspectRatio:false}
+  data:{labels:['معتمدة','قيد المراجعة','مرفوضة'],
+  datasets:[{data:[70,35,15],
+  backgroundColor:['#2e7d32','#f9a825','#c62828']}]},
+  options:{maintainAspectRatio:false}
 });
-
 new Chart(domainChart,{
   type:'bar',
-  data:{
-    labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
-    datasets:[{data:[80,70,65,85,75],backgroundColor:'#0d47a1'}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}
+  data:{labels:['الإنجاز','النمو','التدريس','المناخ','القيادة'],
+  datasets:[{data:[80,70,65,85,75],backgroundColor:'#0d47a1'}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false}}}
 });
 </script>
 
