@@ -2,131 +2,178 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>نظام بُصرة لتقويم الأداء المدرسي</title>
+<title>بَصيرة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Tahoma, Arial;
-  background:linear-gradient(135deg,#f4f6f9,#e8ecf3);
+:root{
+  --main:#0d47a1;
+  --bg:#f4f6fb;
+  --card:#ffffff;
+  --text:#1f2937;
+}
+body.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#e5e7eb;
 }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:50px 20px;
-  text-align:center;
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);transition:.3s}
+
+.topbar{
+  height:70px;
+  background:var(--main);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  font-size:26px;
+  font-weight:700;
 }
 
-h1{
-  color:#1f3c88;
-  font-size:36px;
-  margin-bottom:10px;
+.topbar .actions{
+  position:absolute;
+  left:20px;
+  display:flex;
+  gap:10px;
 }
 
-.subtitle{
-  font-size:18px;
-  color:#555;
-  margin-bottom:40px;
+.topbar button{
+  background:#ffffff22;
+  border:none;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
+.layout{display:flex}
+
+.sidebar{
+  width:260px;
+  background:#0b3c91;
+  min-height:calc(100vh - 70px);
+  padding-top:15px;
 }
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 20px;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.sidebar a.active,
+.sidebar a:hover{
+  background:#1565c0;
+  border-right:5px solid #ffeb3b;
+}
+
+.content{
+  flex:1;
+  padding:30px;
+}
+
+.section{display:none}
+.section.active{display:block}
 
 .card{
-  background:#fff;
-  padding:30px 20px;
-  border-radius:18px;
-  box-shadow:0 12px 25px rgba(0,0,0,.08);
+  background:var(--card);
+  border-radius:14px;
+  padding:30px;
+  max-width:700px;
 }
 
-.card h3{
-  color:#1f3c88;
-  margin-top:0;
+.center{text-align:center}
+.logo{
+  width:120px;
+  margin-bottom:15px;
 }
-
-.card p{
-  font-size:14px;
-  color:#555;
-  line-height:1.7;
-}
-
-.card a{
-  display:inline-block;
-  margin-top:15px;
-  background:#1f3c88;
-  color:#fff;
-  padding:12px 20px;
-  border-radius:10px;
-  text-decoration:none;
-  font-size:15px;
-}
-
-.card a:hover{
-  background:#2563eb;
-}
-
-.footer{
-  margin-top:50px;
-  font-size:13px;
-  color:#666;
-}
+h1{margin:10px 0}
+p{line-height:1.8}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <h1>نظام بُصرة</h1>
-  <div class="subtitle">
-    منصة ذكية لتقويم الأداء المدرسي وتحليل الأدلة ودعم التحسين المستمر
+<div class="topbar">
+  بَصيرة
+  <div class="actions">
+    <button onclick="toggleLang()">🌐</button>
+    <button onclick="toggleMode()">🌙</button>
   </div>
+</div>
 
-  <div class="cards">
+<div class="layout">
 
-    <div class="card">
-      <h3>🏠 لوحة التحكم</h3>
-      <p>
-        نظرة شاملة على أداء المدرسة، عدد الأدلة، المجالات، والمعايير
-      </p>
-      <a href="dashboard.html">الدخول</a>
-    </div>
+<div class="sidebar">
+  <a class="active" onclick="showSection('home',this)">🏠 الرئيسية</a>
+  <a onclick="showSection('evidence',this)">📁 الأدلة</a>
+  <a onclick="showSection('reports',this)">📊 التقارير</a>
+  <a onclick="showSection('ai',this)">🤖 المساعد الذكي</a>
+</div>
 
-    <div class="card">
-      <h3>📁 إدارة الأدلة</h3>
-      <p>
-        رفع الأدلة، متابعتها، اعتمادها، وإضافة الملاحظات
-      </p>
-      <a href="evidence.html">عرض الأدلة</a>
-    </div>
+<div class="content">
 
-    <div class="card">
-      <h3>📊 التقارير الذكية</h3>
-      <p>
-        رسوم بيانية، إحصائيات، وتصدير تقارير PDF و Excel
-      </p>
-      <a href="report.html">عرض التقارير</a>
-    </div>
-
-    <div class="card">
-      <h3>🤖 المساعد الذكي</h3>
-      <p>
-        تحليل الأداء واقتراح أولويات التطوير والجوانب التحسينية
-      </p>
-      <a href="assistant.html">تشغيل المساعد</a>
-    </div>
-
+<!-- الرئيسية -->
+<div id="home" class="section active">
+  <div class="card center">
+    <img src="school-logo.png" class="logo" alt="شعار المدرسة">
+    <h1>بَصيرة</h1>
+    <h3>مدرسة بحر عمان للتعليم الأساسي (1–12)</h3>
+    <p>
+      نظام «بَصيرة» هو نظام رقمي يُعنى بتجميع وتنظيم
+      وتحليل الأدلة المدرسية وفق محاور التقويم المعتمدة،
+      لدعم مدير المدرسة في اتخاذ القرار وتحسين جودة الأداء.
+    </p>
   </div>
+</div>
 
-  <div class="footer">
-    © نظام بُصرة لتقويم الأداء المدرسي – نسخة تجريبية
-  </div>
+<!-- الأدلة -->
+<div id="evidence" class="section">
+  <h2>الأدلة المدرسية</h2>
+  <p>هنا سيتم عرض جميع الأدلة حسب الأقسام والمجالات.</p>
+</div>
+
+<!-- التقارير -->
+<div id="reports" class="section">
+  <h2>التقارير</h2>
+  <p>تقارير إحصائية وتحليلية حول الأدلة وحالاتها.</p>
+</div>
+
+<!-- المساعد الذكي -->
+<div id="ai" class="section">
+  <h2>المساعد الذكي</h2>
+  <p>مساعد ذكي لدعم مدير المدرسة في التحليل والتقويم.</p>
+</div>
 
 </div>
+</div>
+
+<script>
+function showSection(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleMode(){
+  document.body.classList.toggle('dark');
+}
+
+let lang='ar';
+function toggleLang(){
+  lang = lang==='ar'?'en':'ar';
+  document.documentElement.dir = lang==='ar'?'rtl':'ltr';
+}
+</script>
 
 </body>
 </html>
